@@ -1,9 +1,9 @@
 import paho.mqtt.client as mqtt
 import mysql.connector
+from datetime import datetime, date
 
-add_info = ("INSERT INTO `tbl_info` (`date`, `nom_commande`, `quantite_produite`, `temperature`, `humidite`, "
-            "`quantite_bon`, `quantite_mauvais`) "
-            " VALUES (%s, %s, %s, %s, %s, %s, %s)")
+add_info = ("INSERT INTO `tbl_info` (`id_epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`)" 
+		    " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 
 dataArray = []
 
@@ -27,14 +27,17 @@ def on_message(client, userdata, msg):
 
     if msg.topic == "Mecanium/ESP/Humidite":
         #humidite = str(msg.payload.decode("utf-8"))
-        data = (dataArray[0], "test2", "0", dataArray[1], dataArray[2], "0", "0")
+        mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
+        data = (dataArray[0], "test2", mgsDate, "0", dataArray[1], dataArray[2], "0", "0")
         connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
         cursor = connection.cursor(buffered=True)
         cursor.execute(add_info, data)
         connection.commit()
         cursor.close()
         connection.close()
+        print(mgsDate)
         dataArray.clear()
+
 
 
 
