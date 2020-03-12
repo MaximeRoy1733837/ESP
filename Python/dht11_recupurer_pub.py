@@ -14,9 +14,9 @@ try:
         result = instance.read()
         if result.is_valid():
 
-            publish.single("Temps", str(datetime.datetime.now()), hostname="test.mosquitto.org")
-            publish.single("Temperature", result.temperature, hostname="test.mosquitto.org")
-            publish.single("Humidite", result.humidity, hostname="test.mosquitto.org")
+            publish.single("Mecanium/ESP/Temps", str(datetime.datetime.now()), hostname="test.mosquitto.org")
+            publish.single("Mecanium/ESP/Temperature", result.temperature, hostname="test.mosquitto.org")
+            publish.single("Mecanium/ESP/Humidite", result.humidity, hostname="test.mosquitto.org")
             print("Done")
 
         time.sleep(6)
