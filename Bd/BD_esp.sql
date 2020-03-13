@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `bd_esp` default CHARACTER SET utf8 COLLATE utf8_general_ci; 
+CREATE DATABASE  IF NOT EXISTS `bd_esp` default CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `bd_esp`;
 
 CREATE TABLE `tbl_info` (

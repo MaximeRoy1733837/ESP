@@ -3,11 +3,24 @@
 
     class Manager extends Connexion
     {
-        public function getAnimelist() { 
-            $sql = 'SELECT * FROM anime_list order by score_anime DESC'; 
-            $animes = self::getConnexion()->query($sql); 
-            return $animes;        
-         } 
+        public function getInfo() { 
+            $sql = 'SELECT id, epoch, nom_commande, date, quantite_produite, temperature, humidite, quantite_bon, quantite_mauvais FROM tbl_info';
+            $resultat = self::getConnexion()->query($sql);
+            return $resultat;        
+        }
+
+        //public function getHistory() { 
+           // $sql = 'SELECT id, epoch, nom_commande, date_historique, quantite_produite, temperature, humidite, quantite_bon, quantite_mauvais FROM tbl_historique';
+            //$resultat = self::getConnexion()->query($sql);
+            //return $resultat;        
+        //}
+
+        public function getUser() { 
+            $sql = 'SELECT no_utilisateur, nom, prenom, nom_utilisateur, motPasse FROM tbl_utilisateur';
+            $resultat = self::getConnexion()->query($sql);
+            return $resultat;        
+        }
+
     }
 
 ?>
