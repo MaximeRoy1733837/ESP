@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import mysql.connector
 from datetime import datetime, date
 
-add_info = ("INSERT INTO `tbl_info` (`id_epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`)" 
+add_info = ("INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`)" 
 		    " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 
 dataArray = []

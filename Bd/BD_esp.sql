@@ -2,7 +2,8 @@ CREATE DATABASE  IF NOT EXISTS `bd_esp` default CHARACTER SET utf8 COLLATE utf8_
 USE `bd_esp`;
 
 CREATE TABLE `tbl_info` (
-  `id_epoch` varchar(35) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `epoch` varchar(35) NOT NULL,
   `nom_commande` varchar(20) DEFAULT NULL,
   `date` varchar(35) DEFAULT NULL,
   `quantite_produite` varchar(5) DEFAULT NULL,
@@ -10,10 +11,10 @@ CREATE TABLE `tbl_info` (
   `humidite` varchar(5) DEFAULT NULL,
   `quantite_bon` varchar(5) NOT NULL,
   `quantite_mauvais` varchar(5) NOT NULL,
-  PRIMARY KEY (`id_epoch`),
+  PRIMARY KEY (`id`),
   
-	KEY `fk_date` (`id_epoch`),
-	CONSTRAINT `fk_date` FOREIGN KEY (`id_epoch`) REFERENCES `tbl_historique` (`date_historique`) ON UPDATE CASCADE);
+	KEY `fk_date` (`epoch`),
+	CONSTRAINT `fk_date` FOREIGN KEY (`epoch`) REFERENCES `tbl_historique` (`date_historique`) ON UPDATE CASCADE);
   
 CREATE TABLE `tbl_historique` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -21,7 +22,7 @@ CREATE TABLE `tbl_historique` (
   PRIMARY KEY (`id`),
   
 	KEY `date_historique` (`date_historique`),
-	CONSTRAINT `tbl_info_ibfk_1` FOREIGN KEY (`date_historique`) REFERENCES `tbl_info` (`id_epoch`) ON UPDATE CASCADE);
+	CONSTRAINT `tbl_info_ibfk_1` FOREIGN KEY (`date_historique`) REFERENCES `tbl_info` (`epoch`) ON UPDATE CASCADE);
   
 CREATE TABLE `tbl_utilisateur` (
   `no_utilisateur` int(11) NOT NULL AUTO_INCREMENT,
@@ -31,7 +32,7 @@ CREATE TABLE `tbl_utilisateur` (
   `motPasse` varchar(35) NOT NULL,
   PRIMARY KEY (`no_utilisateur`));
   
-INSERT INTO `tbl_info` (`id_epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`) 
+INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`) 
 		VALUES 	(1583863424,'vert',0,75,24.5,32,70,5),
 				(1583863453,'jaune',0,20,25,34.1,19,1),
                 (1583863460,'vert',0,160,23.9,30,150,10);
