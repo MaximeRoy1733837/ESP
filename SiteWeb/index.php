@@ -11,6 +11,7 @@
 		}
 	}	
 	else {
-		Connexion(); 
+		//Connexion(); 
+		Historique();
 	}
 ?>

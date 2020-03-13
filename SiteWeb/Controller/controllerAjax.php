@@ -1,15 +1,6 @@
 <?php
     require('Model/managerAjax.php');
 
-    function addingAnime($name, $genre, $score)
-    {
-        $class = new ManagerAjax();
-        $resultat = $class->addAnime($name, $genre, $score);
-        
-        echo json_encode(array("name" => $name, "genre" => $genre, "score" => $score));
-
-    }
-
     function verificationConnexion($username, $mdp)
     {
         $class = new ManagerAjax();

@@ -9,11 +9,11 @@
             return $resultat;        
         }
 
-        //public function getHistory() { 
-           // $sql = 'SELECT id, epoch, nom_commande, date_historique, quantite_produite, temperature, humidite, quantite_bon, quantite_mauvais FROM tbl_historique';
-            //$resultat = self::getConnexion()->query($sql);
-            //return $resultat;        
-        //}
+        public function getHistory() { 
+            $sql = 'SELECT id, nom_commande, date_historique, quantite_produite, temperature, humidite, quantite_bon, quantite_mauvais FROM tbl_historique';
+            $resultat = self::getConnexion()->query($sql);
+            return $resultat;        
+        }
 
         public function getUser() { 
             $sql = 'SELECT no_utilisateur, nom, prenom, nom_utilisateur, motPasse FROM tbl_utilisateur';
