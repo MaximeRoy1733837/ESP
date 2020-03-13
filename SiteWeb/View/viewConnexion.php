@@ -4,7 +4,7 @@
 
 <div class="container text-center">
     <div class="">
-        <a href="">
+        <a href="index.php?action=Home">
             <img src="Assets/Images/Mecanium.png" alt="Mecanium Logo" class="img-responsive center-block">
         </a>
     </div>

@@ -20,6 +20,7 @@
 <body>
     <div class="">
         <div class="" name="menu">
+            <?php if($currentPage != "Connexion")require("View/viewMenu.php") ?>
         </div>
 
         <div class=""> 
