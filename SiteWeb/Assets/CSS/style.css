@@ -1,0 +1,26 @@
+p{
+    font: 24px "Fira Sans", sans-serif;
+}
+
+h1{
+    font: 50px "Fira Sans", sans-serif;
+}
+
+em.is-invalid {
+    color: #dc3545;
+    position: absolute;
+    font-size: 12px;
+    margin-top: -2px;
+    margin-bottom: 0;
+    font-style: normal;
+}
+
+.floatRight{
+    float: right;
+}
+
+.contentSpacing{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 56px;
+}
