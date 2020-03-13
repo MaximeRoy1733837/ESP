@@ -1,5 +1,5 @@
 <?php
-    require('controller/controllerAjax.php');
+    require('Controller/controllerAjax.php');
 
     if (isset($_GET['event'])) {
 		switch ($_GET['event'] ) {

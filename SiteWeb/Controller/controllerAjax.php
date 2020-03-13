@@ -1,5 +1,5 @@
 <?php
-    require('model/managerAjax.php');
+    require('Model/managerAjax.php');
 
     function addingAnime($name, $genre, $score)
     {

@@ -1,9 +1,15 @@
 <?php
-    require('model/manager.php');
+    require('Model/manager.php');
 
     function Homepage()
     {
         $currentPage = "Home";
-        require('view/viewHome.php');
+        require('View/viewHome.php');
+    }
+
+    function Connexion()
+    {
+        $currentPage = "Connexion";
+        require('View/viewConnexion.php');
     }
 ?>

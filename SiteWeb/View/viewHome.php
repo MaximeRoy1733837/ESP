@@ -2,13 +2,9 @@
 
 <?php ob_start(); ?>
 
-<div>
-    <img class="img-fluid" src="assets/images/berserkTreeResize.png">
-</div>
-
-<div class="contentSpacing">
+<div class="">
     
-    <h1 class="text-center mb-5"> MyList </h1>
+    <h1 class=""> MyList </h1>
 
     <div class="">
         <p>
