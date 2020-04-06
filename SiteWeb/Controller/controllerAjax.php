@@ -18,7 +18,6 @@
         }
     }
 
-
     function GetLastInsertedInfo()
     {
         $class = new ManagerAjax();
