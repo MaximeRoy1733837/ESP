@@ -2,15 +2,18 @@
 
 <?php ob_start(); 
 $cpt = 0;?>
+</br>
+</br>
+<h4 class="alert alert-primary" role="alert">Historique</h4>
 <div class="accordion" id="accordionExample">
-    
+
         <?php while ($enregistrement=$resultat->fetch()){ ?>
             <div class="card">
                 <div class="card-header" id="heading<?php echo $cpt ?>">
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $cpt ?>" aria-expanded="false" aria-controls="collapse<?php echo $cpt ?>">
-                            Commande: <?php echo $enregistrement['nom_commande'] ?> 
-                            Date: <?php echo $enregistrement['date_historique'] ?>
+                            <h5 class="cardH5">Commande:  <p class="cardInfo"><?php echo $enregistrement['nom_commande'] ?></p> </br>
+                            Date: <p class="cardInfo"><?php echo $enregistrement['date_historique'] ?></p> </h5>
                         </button>
                     </h2>
                 </div>

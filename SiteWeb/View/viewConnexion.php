@@ -12,6 +12,8 @@
     <br>
     <br>
 
+    <h4 class="alert alert-primary" role="alert">Connection</h4>
+    
     <div class="contentSpacing">
         <form id="frm_connexion" name="frm_connexion" method="POST" action="#">
 

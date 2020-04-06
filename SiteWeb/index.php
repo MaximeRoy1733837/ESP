@@ -18,7 +18,6 @@
 	}	
 	else {
 		//Connexion(); 
-		//Historique();
 		Homepage();
 	}
 ?>

@@ -39,3 +39,17 @@ em.is-invalid {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.cardH5{
+    color: rgb(0, 0, 0);
+    text-align: left;
+}
+
+.card-body{
+    font-size: x-large;
+}
+
+.cardInfo{
+    display: inline;
+    font-size: x-large;
+}

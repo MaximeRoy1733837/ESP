@@ -4,15 +4,7 @@
 
 <div class="contentpacing">
 
-    <div class="container text-center">
-        <a href="index.php?action=Home">
-            <img src="Assets/Images/Mecanium.png" alt="Mecanium Logo" class="img-responsive center-block">
-        </a>
-    </div>
-
-    <br>
-
-    <h4 class="alert alert-primary"" role="alert">Information commande en cours</h4>
+    <h4 class="alert alert-primary" role="alert">Information commande en cours</h4>
 
     <div class="card bg-light">
         <div class="card-body">
@@ -37,7 +29,7 @@
 
     <br>
 
-    <h4 class="alert alert-primary"" role="alert">Mesure</h4>
+    <h4 class="alert alert-primary" role="alert">Mesure</h4>
     <h5 class="lastUpdateDate">Dernière mise à jour : 6 avril 2020 11:16:36</h5>
 
     <div class="row">
@@ -64,7 +56,7 @@
 
     <br>
 
-    <h4 class="alert alert-primary"" role="alert">Quantité production</h4>
+    <h4 class="alert alert-primary" role="alert">Quantité production</h4>
     <h5 class="lastUpdateDate">Dernière mise à jour : 6 avril 2020 11:16:36</h5>
 
     <div class="row">
