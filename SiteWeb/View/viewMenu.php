@@ -11,3 +11,11 @@
     </div>
   </div>
 </nav>
+<br>
+<br>
+<br>
+<div class="container text-center">
+    <a href="index.php?action=Home">
+        <img src="Assets/Images/Mecanium.png" alt="Mecanium Logo" class="img-responsive center-block">
+    </a>
+</div>

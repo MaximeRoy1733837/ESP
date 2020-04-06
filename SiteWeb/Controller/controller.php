@@ -19,6 +19,8 @@
 
     function Historique()
     {
+        $currentPage = "Historique";
+
         $historique = new Manager;
         $resultat = $historique->getHistory();
 

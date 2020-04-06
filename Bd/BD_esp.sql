@@ -38,8 +38,8 @@ INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `t
                 (1583863460,'vert',0,160,23.9,30,150,10);
                 
 INSERT INTO `tbl_historique` (`nom_commande`, `date_historique`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`) 
-		VALUES 	('vert',0,75,24.5,32,70,5),
-				('jaune',0,175,25.5,20,170,5);
+		VALUES 	('Vert','Lundi 6 avril 13:52',75,24.5,32,70,5),
+				('Jaune','Lundi 6 avril 13:52',175,25.5,20,170,5);
   
 INSERT INTO `tbl_utilisateur` (`no_utilisateur`, `nom`, `prenom`, `nom_utilisateur`, `motPasse`) 
 		VALUES 	(1,'Roy','Maxime','mroy','ESP2020'),
