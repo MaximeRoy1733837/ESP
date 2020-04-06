@@ -15,7 +15,7 @@
     <h4 class="alert alert-primary" role="alert">Connection</h4>
     
     <div class="contentSpacing">
-        <form id="frm_connexion" name="frm_connexion" method="POST" action="#">
+        <form id="frm_connexion" name="frm_connexion" method="POST" action="index.php?action=Verifier">
 
             <div class="form-group">
                 <input type="text" class="form-control form-control-lg mb-2" id="txt_username" name="txt_username" placeholder="Nom d'utilisateur">

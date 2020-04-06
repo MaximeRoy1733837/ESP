@@ -4,7 +4,7 @@ $("#frm_connexion").validate({
     rules: {
         txt_username: {
             required: true,
-            minlength: 5
+            minlength: 3
 		},
 		txt_mdp: {
             required: true,
