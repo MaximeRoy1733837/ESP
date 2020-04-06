@@ -16,6 +16,18 @@ em.is-invalid {
     float: right;
 }
 
-.contentSpacing{
-    margin-top: 56px;
+.rejectQuantities{
+    font-size: xx-large;
+    color: #dc3545; 
+}
+
+.acceptQuantities{
+    font-size: xx-large;
+    color: rgb(86, 143, 0); 
+}
+
+.contentpacing{
+    margin-top: 170px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

@@ -12,6 +12,7 @@
 	}	
 	else {
 		//Connexion(); 
-		Historique();
+		//Historique();
+		Homepage();
 	}
 ?>
