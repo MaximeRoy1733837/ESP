@@ -9,8 +9,8 @@ $cpt = 0;?>
                 <div class="card-header" id="heading<?php echo $cpt ?>">
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $cpt ?>" aria-expanded="false" aria-controls="collapse<?php echo $cpt ?>">
-                            <?php echo $enregistrement['nom_commande'] ?>
-                            <?php echo $enregistrement['date_historique'] ?>
+                            Commande: <?php echo $enregistrement['nom_commande'] ?> 
+                            Date: <?php echo $enregistrement['date_historique'] ?>
                         </button>
                     </h2>
                 </div>
@@ -19,7 +19,7 @@ $cpt = 0;?>
                     <div class="card-body">
                         Quantité de bon: <?php echo $enregistrement['quantite_bon'] ?> </br>
                         Quantité de mauvais: <?php echo $enregistrement['quantite_mauvais'] ?> </br>
-                        Température: <?php echo $enregistrement['temperature'] ?> C </br>
+                        Température: <?php echo $enregistrement['temperature'] ?> °C </br>
                         Humidité: <?php echo $enregistrement['humidite'] ?> % </br>
                     </div>
                 </div>
