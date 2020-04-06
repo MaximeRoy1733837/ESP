@@ -1,8 +1,6 @@
 <?php
     require('Model/managerAjax.php');
 
-<<<<<<< HEAD
-=======
     function verificationConnexion($username, $mdp)
     {
         $class = new ManagerAjax();
@@ -31,5 +29,4 @@
                                 "date" => $resultatFetch["date"], "quantite_produire" => $resultatFetch["quantite_produite"], "temperature" => $resultatFetch["temperature"],
                                  "humidite" => $resultatFetch["humidite"], "quantite_bon" => $resultatFetch["quantite_bon"], "quantite_bad" => $resultatFetch["quantite_mauvais"]));
     }
->>>>>>> 6c95307265aa5224a7eeee20438c339981c6c08b
 ?>
