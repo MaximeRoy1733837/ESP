@@ -9,6 +9,9 @@
         </a>
     </div>
 
+    <br>
+    <br>
+
     <div class="contentSpacing">
         <form id="frm_connexion" name="frm_connexion" method="POST" action="#">
 

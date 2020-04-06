@@ -16,6 +16,10 @@ em.is-invalid {
     float: right;
 }
 
+.infoCard{
+    font-size: xx-large;
+}
+
 .rejectQuantities{
     font-size: xx-large;
     color: #dc3545; 
@@ -26,8 +30,12 @@ em.is-invalid {
     color: rgb(86, 143, 0); 
 }
 
+.lastUpdateDate{
+    color: rgb(0, 99, 248);
+}
+
 .contentpacing{
-    margin-top: 170px;
+    margin-top: 100px;
     margin-left: 10px;
     margin-right: 10px;
 }
