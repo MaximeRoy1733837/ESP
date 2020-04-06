@@ -3,7 +3,8 @@
 
     if (isset($_GET['event'])) {
 		switch ($_GET['event'] ) {
-			case 'AjoutAnime':
+			case 'GetNewInfo':
+				getLastInsertedInfo();
 				break;
 			default :
 				throw new Exception('Aucune page spécifique demandée');	

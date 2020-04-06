@@ -9,21 +9,21 @@
     <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Nom commande :</h5>
-            <p class="card-text text-center infoCard">Test123</p>
+            <p id="nom_commande" class="card-text text-center infoCard">Test123</p>
         </div>
     </div>
 
     <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Date début production :</h5>
-            <p class="card-text text-center infoCard">4 avril 2020 12:45</p>
+            <p id="date_debut" class="card-text text-center infoCard">4 avril 2020 12:45</p>
         </div>
     </div>
 
     <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Quantité à produire :</h5>
-            <p class="card-text text-center infoCard">220</p>
+            <p id="quantite_produire" class="card-text text-center infoCard">220</p>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Température:</h5>
-                        <p class="card-text text-center infoCard">23</p>
+                        <p id="Temperature" class="card-text text-center infoCard">23</p>
                     </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Humidité:</h5>
-                        <p class="card-text text-center infoCard">16</p>
+                        <p id="Humidite" class="card-text text-center infoCard">16</p>
                     </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Quantité acceptés:</h5>
-                        <p class="card-text text-center acceptQuantities">55</p>
+                        <p id="quantite_bon" class="card-text text-center acceptQuantities">55</p>
                     </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Quantité rejettés:</h5>
-                        <p class="card-text text-center rejectQuantities">12</p>
+                        <p id="quantite_bad" class="card-text text-center rejectQuantities">12</p>
                     </div>
             </div>
         </div>
