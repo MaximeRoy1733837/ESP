@@ -45,10 +45,22 @@ INSERT INTO `tbl_utilisateur` (`no_utilisateur`, `nom`, `prenom`, `nom_utilisate
 		VALUES 	(1,'Roy','Maxime','mroy','ESP2020'),
 				(2,'Letourneau','Louca','lletourneau','Mecanium789'),
                 (3,'Lepage','Yves','ylapage','Mecanium789');
+                
+  
+delimiter |
+create procedure getLastInsertedInfo()
+begin
+	select * 
+    from tbl_info 
+    where id = (select max(id) from tbl_info);
+end|
 
 -- drop database bd_esp
+-- drop procedure getLastInsertedInfo
 
 -- select * FROM tbl_info
 -- select * FROM tbl_historique
 -- select * FROM tbl_utilisateur
+
+-- call getLastInsertedInfo
                 
