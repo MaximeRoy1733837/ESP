@@ -83,8 +83,8 @@
 
     <br>
 
-    <div class="progress">
-        <div id="progression" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="progress" style="height: 30px;">
+        <div id="progression" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <br>

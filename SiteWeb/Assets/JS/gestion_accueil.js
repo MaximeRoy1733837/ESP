@@ -1,7 +1,3 @@
-//$(document).ready(function(){
-    //new get_NewInfo(); 
-  //});
-
   $(document).ready(function(){
     setInterval(function(){
         $.ajax({
@@ -21,24 +17,21 @@
                 if (parseInt(data["quantite_produire"]) > 0)
                 {
                   percent = Math.round((parseInt(data["quantite_bon"]) / parseInt(data["quantite_produire"]) * 100));
+                  
+                  if(percent >= 100)
+                  {
+                    percent = 100;
+                    $('#progression').addClass("bg-success");
+                  }
+                  else
+                  {
+                    $('#progression').removeClass("bg-success")
+                  }
                 }         
 
                 $('#progression').html(percent + '%');
                 $('#progression').attr('aria-valuenow', percent).css('width', percent + '%');
           }
         });
-    },3000);
+    },1000);
     });
-
-
-  function get_NewInfo(){
-    var feedback = $.ajax({
-        type: "POST",
-        url: "index.php?envent=GetNewInfo",
-        async: false
-    }).complete(function(){
-        setTimeout(function(){get_NewInfo();}, 10000);
-    }).responseText;
-
-    $('#nom_commande').html(feedback);
-}
