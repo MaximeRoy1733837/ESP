@@ -5,7 +5,12 @@ from datetime import datetime, date
 add_info = ("INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`)" 
 		    " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 
+add_history = ("INSERT INTO `tbl_historique` (`nom_commande`, `date_historique`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`)"
+		    " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
+
 dataArray = []
+
+#commande = "test"
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc))
@@ -28,7 +33,7 @@ def on_message(client, userdata, msg):
     if msg.topic == "Mecanium/ESP/Humidite":
         #humidite = str(msg.payload.decode("utf-8"))
         mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
-        data = (dataArray[0], "test2", mgsDate, "0", dataArray[1], dataArray[2], "0", "0")
+        data = (dataArray[0], "test1", mgsDate, "0", dataArray[1], dataArray[2], "0", "0")
         connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
         cursor = connection.cursor(buffered=True)
         cursor.execute(add_info, data)
