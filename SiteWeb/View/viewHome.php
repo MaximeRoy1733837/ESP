@@ -9,7 +9,7 @@
     <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Nom commande :</h5>
-            <p id="nom_commande" class="card-text text-center infoCard">Test123</p>
+            <p id="nom_commande" class="card-text text-center infoCard"></p>
         </div>
     </div>
 
@@ -23,14 +23,14 @@
     <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Quantité à produire :</h5>
-            <p id="quantite_produire" class="card-text text-center infoCard">220</p>
+            <p id="quantite_produire" class="card-text text-center infoCard"></p>
         </div>
     </div>
 
     <br>
 
     <h4 class="alert alert-primary" role="alert">Mesure</h4>
-    <h5 class="lastUpdateDate">Dernière mise à jour : 6 avril 2020 11:16:36</h5>
+    <h5 class="lastUpdateDate"></h5>
 
     <div class="row">
 
@@ -38,7 +38,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Température:</h5>
-                        <p id="Temperature" class="card-text text-center infoCard">23</p>
+                        <p id="temperature" class="card-text text-center infoCard"></p>
                     </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Humidité:</h5>
-                        <p id="Humidite" class="card-text text-center infoCard">16</p>
+                        <p id="humidite" class="card-text text-center infoCard"></p>
                     </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
     <br>
 
     <h4 class="alert alert-primary" role="alert">Quantité production</h4>
-    <h5 class="lastUpdateDate">Dernière mise à jour : 6 avril 2020 11:16:36</h5>
+    <h5 class="lastUpdateDate"></h5>
 
     <div class="row">
 
@@ -65,7 +65,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Quantité acceptés:</h5>
-                        <p id="quantite_bon" class="card-text text-center acceptQuantities">55</p>
+                        <p id="quantite_bon" class="card-text text-center acceptQuantities"></p>
                     </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
             <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Quantité rejettés:</h5>
-                        <p id="quantite_bad" class="card-text text-center rejectQuantities">12</p>
+                        <p id="quantite_bad" class="card-text text-center rejectQuantities"></p>
                     </div>
             </div>
         </div>
@@ -92,6 +92,8 @@
     <br>
 
 </div> 
+
+<script type="text/javascript" src="Assets/JS/gestion_accueil.js"></script>
 
 <?php $contenu = ob_get_clean(); ?>
 

@@ -9,9 +9,15 @@
             success: function(output) {
                 var data = JSON.parse(output);
                 $('#nom_commande').html(data["nom_commande"]);
+                $('#quantite_produire').html(data["quantite_produire"]);
+                $('#quantite_bon').html(data["quantite_bon"]);
+                $('#quantite_bad').html(data["quantite_bad"]);
+                $('#temperature').html(data["temperature"]);
+                $('#humidite').html(data["humidite"]);
+                $('.lastUpdateDate').html('Dernière mise à jour: ' + data["date"]);
           }
         });
-    },5000);
+    },3000);
     });
 
 

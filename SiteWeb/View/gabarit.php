@@ -31,6 +31,6 @@
 </body>
 
 <script type="text/javascript" src="Assets/JS/gestion_TempsReel.js"></script>
-<script type="text/javascript" src="Assets/JS/gestion_accueil.js"></script>
+
 
 </html>
