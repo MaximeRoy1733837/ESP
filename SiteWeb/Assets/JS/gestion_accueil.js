@@ -1,3 +1,5 @@
+  var finCommande = false;
+  
   $(document).ready(function(){
     setInterval(function(){
         $.ajax({
@@ -22,10 +24,21 @@
                   {
                     percent = 100;
                     $('#progression').addClass("bg-success");
+
+                      if(window.finCommande === false)
+                      {
+                        Swal.fire(
+                          'Succès',
+                          'Commande terminé',
+                          'success'
+                        );
+                        window.finCommande = true;
+                      }       
                   }
                   else
                   {
                     $('#progression').removeClass("bg-success")
+                    window.finCommande = false;
                   }
                 }         
 
