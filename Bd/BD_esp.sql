@@ -11,6 +11,7 @@ CREATE TABLE `tbl_info` (
   `humidite` varchar(5) DEFAULT NULL,
   `quantite_bon` varchar(5) NOT NULL,
   `quantite_mauvais` varchar(5) NOT NULL,
+  `bloque` varchar(5) NOT NULL,
   PRIMARY KEY (`id`));
   
 CREATE TABLE `tbl_historique` (
@@ -32,10 +33,10 @@ CREATE TABLE `tbl_utilisateur` (
   `motPasse` varchar(35) NOT NULL,
   PRIMARY KEY (`no_utilisateur`));
   
-INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`) 
-		VALUES 	(1583863424,'vert','Lundi 6 avril 13:52',75,24.5,32,70,5),
-				(1583863453,'jaune',0,20,25,34.1,19,1),
-                (1583863460,'rouge',0,160,23.9,30,150,10);
+INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`,`bloque`) 
+		VALUES 	(1583863424,'vert','Lundi 6 avril 13:52',75,24.5,32,70,5,'non'),
+				(1583863453,'jaune',0,20,25,34.1,19,1,'non'),
+                (1583863460,'rouge',0,160,23.9,30,150,10,'non');
                 
 INSERT INTO `tbl_historique` (`nom_commande`, `date_historique`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`) 
 		VALUES 	('Vert','Lundi 6 avril 13:52',75,24.5,32,70,5),
