@@ -10,7 +10,7 @@
         }
 
         public function getHistory() { 
-            $sql = 'SELECT id, nom_commande, date_historique, quantite_produite, temperature, humidite, quantite_bon, quantite_mauvais FROM tbl_historique';
+            $sql = 'SELECT id, nom_commande, date_historique, quantite_produite, temperature, humidite, quantite_bon, quantite_mauvais FROM tbl_historique ORDER BY  id DESC';
             $resultat = self::getConnexion()->query($sql);
             return $resultat;        
         }

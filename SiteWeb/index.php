@@ -11,12 +11,12 @@
 				Historique();
 				break;
 			case 'Connexion':
-				$_SESSION['connecter'] = 0;
+				//$_SESSION['connecter'] = 0;
 				Connexion();
 				break;
-			case 'Verifier':
-				verificationConnexion(htmlentities($_POST['txt_username']),htmlentities($_POST['txt_mdp']));
-				break;
+			//case 'Verifier':
+				//verificationConnexion(htmlentities($_POST['txt_username']),htmlentities($_POST['txt_mdp']));
+				//break;
 			default :
 				throw new Exception('Aucune page spécifique demandée');	
 		}

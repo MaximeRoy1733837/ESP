@@ -33,9 +33,9 @@ CREATE TABLE `tbl_utilisateur` (
   PRIMARY KEY (`no_utilisateur`));
   
 INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`) 
-		VALUES 	(1583863424,'vert','Lundi 6 avril 13:52',75,24.5,32,70,5),
-				(1583863453,'jaune',0,20,25,34.1,19,1),
-                (1583863460,'rouge',0,160,23.9,30,150,10);
+		VALUES 	(1583863424,'vert','Jeudi 2 avril 3:52:16',75,24.5,32,70,5),
+				(1583863453,'jaune','Vendredi 3 avril 13:52:07',20,25,34.1,19,1),
+                (1583863460,'rouge','Samedi 4 avril 18:52:42',160,23.9,30,150,10);
                 
 INSERT INTO `tbl_historique` (`nom_commande`, `date_historique`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`) 
 		VALUES 	('Vert','Lundi 6 avril 13:52',75,24.5,32,70,5),
@@ -55,12 +55,23 @@ begin
     where id = (select max(id) from tbl_info);
 end|
 
+delimiter |
+create procedure VerificationLogin(in _nom varchar(20), in _mpd varchar(45))
+begin
+	select *
+    from tbl_utilisateur
+    where nom_utilisateur = _nom and motPasse = _mpd;
+end|
+
+
 -- drop database bd_esp
 -- drop procedure getLastInsertedInfo
+-- drop procedure VerificationLogin
 
 -- select * FROM tbl_info
 -- select * FROM tbl_historique
 -- select * FROM tbl_utilisateur
 
 -- call getLastInsertedInfo
+-- call VerificationLogin('lletourneau','Mecanium789')
                 

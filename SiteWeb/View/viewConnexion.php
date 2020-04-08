@@ -15,10 +15,10 @@
     <h4 class="alert alert-primary" role="alert">Connection</h4>
     
     <div class="contentSpacing">
-        <form id="frm_connexion" name="frm_connexion" method="POST" action="index.php?action=Verifier">
+        <form id="frm_connexion" name="frm_connexion" method="POST" action="#">
 
             <div class="form-group">
-                <input type="text" class="form-control form-control-lg mb-2" id="txt_username" name="txt_username" placeholder="Nom d'utilisateur">
+                <input type="text" class="form-control form-control-lg mb-2" id="txt_utilisateur" name="txt_utilisateur" placeholder="Nom d'utilisateur">
             </div>
 
             <div class="form-group">
@@ -26,6 +26,8 @@
             </div>
 
             <div id="etat_connexion" style="color:red"></div>
+
+            <br>
             
             <div class="">
                 <button type="submit" class="btn btn-primary btn-lg">Login</button>

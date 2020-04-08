@@ -11,8 +11,8 @@
     {
         $currentPage = "Connexion";
 
-        $user = new Manager;
-        $resultat = $user->getUser();
+        //$user = new Manager;
+        //$resultat = $user->getUser();
 
         require('View/viewConnexion.php');
     }

@@ -1,20 +1,20 @@
 <?php
     require('Model/managerAjax.php');
 
-    function verificationConnexion($username, $mdp)
+    function VerificationLogin($username, $mdp)
     {
         $class = new ManagerAjax();
 
-        $resultat = $class->verificationConnexion($username, $mdp);
+        $resultat = $class->validationLogin($username, $mdp);
         $resultatFetch = $resultat->fetch();
         
         if($resultatFetch == "")
         {
-            echo json_encode(array("etat" => "bad"));
+            echo json_encode(array("etatLogin" => "bad"));
         }
         else
         {
-            echo json_encode(array("etat" => "good"));
+            echo json_encode(array("etatLogin" => "good"));
         }
     }
 

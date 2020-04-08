@@ -2,7 +2,7 @@ $("#frm_connexion").validate({
     errorClass: "is-invalid",
     errorElement: "em",
     rules: {
-        txt_username: {
+        txt_utilisateur: {
             required: true,
             minlength: 3
 		},
@@ -12,7 +12,7 @@ $("#frm_connexion").validate({
 		}
 	},
 	messages: {
-	    txt_username: {
+	    txt_utilisateur: {
             required: 'Le nom est obligatoire'
  		},
         txt_mdp: {
@@ -22,27 +22,28 @@ $("#frm_connexion").validate({
 	},
     submitHandler: function () {
         $.ajax({
-            url: "ajaxHandler.php?event=Login",
+            url: "ajaxHandler.php?event=ValidateLogin",
             type: 'POST',
             data: {
-                pseudo: $("#txt_username").val(),
+                nom_utilisateur: $("#txt_utilisateur").val(),
                 mdp: $("#txt_mdp").val()
             },
             success: function(output) {
                 var data = JSON.parse(output);
 
-                if (data['etat'] === "good")
+                if (data['etatLogin'] === "good")
                 {
                     window.location = 'index.php?action=Home'
-                    //$("#etat_connexion").html("NICE")
                 }
-                else if (data['etat'] === "bad")
+                else if (data['etatLogin'] === "bad")
                 {
-                    $("#etat_connexion").html("Le nom d'utilisateur ou le mot de passe est incorrect")
+                    $("#etat_connexion").html("Le nom d'utilisateur ou le mot de passe est incorrect");
+                    $("#txt_utilisateur").addClass("is-invalid");
+                    $("#txt_mdp").addClass("is-invalid");
                 }
                 else
                 {
-                    $("#etat_connexion").html("Une Erreur c'est produite veillez réessayer")
+                    $("#etat_connexion").html("Une erreur c'est produite veillez réessayer");
                 }
             }
         });
