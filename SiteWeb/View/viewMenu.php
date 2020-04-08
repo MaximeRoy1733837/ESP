@@ -7,7 +7,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link <?php if($currentPage == "Home"){?>  active <?php } ?>" href="index.php?action=Home">Accueil</a>
       <a class="nav-item nav-link <?php if($currentPage == "Historique"){?>  active <?php } ?>" href="index.php?action=Historique">Historique</a>
-      <a class="nav-item nav-link" href="index.php?action=Connexion">Se déconnecter</a>
+      <a class="nav-item nav-link" href="index.php?action=Deconnexion">Se déconnecter</a>
     </div>
   </div>
 </nav>

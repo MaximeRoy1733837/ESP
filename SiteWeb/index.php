@@ -3,7 +3,9 @@
     require('Controller/controller.php');
 
     if (isset($_GET['action'])) {
-		switch ($_GET['action'] ) {
+		if(isset($_SESSION['connecter']))
+		{
+			switch ($_GET['action']){
 			case 'Home':
 				Homepage();
 				break;
@@ -11,18 +13,21 @@
 				Historique();
 				break;
 			case 'Connexion':
-				//$_SESSION['connecter'] = 0;
 				Connexion();
 				break;
-			//case 'Verifier':
-				//verificationConnexion(htmlentities($_POST['txt_username']),htmlentities($_POST['txt_mdp']));
-				//break;
+			case 'Deconnexion':
+				Deconnexion();
+				break;
 			default :
 				throw new Exception('Aucune page spécifique demandée');	
+			}
 		}
+		else
+		{
+			Connexion();
+		}	
 	}	
 	else {
-		//Connexion(); 
-		Homepage();
+		Connexion(); 
 	}
 ?>

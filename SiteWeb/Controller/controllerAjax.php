@@ -14,6 +14,9 @@
         }
         else
         {
+            session_start();
+            $_SESSION['connecter'] = 1;
+
             echo json_encode(array("etatLogin" => "good"));
         }
     }

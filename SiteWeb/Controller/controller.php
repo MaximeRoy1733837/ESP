@@ -10,10 +10,13 @@
     function Connexion()
     {
         $currentPage = "Connexion";
+        require('View/viewConnexion.php');
+    }
 
-        //$user = new Manager;
-        //$resultat = $user->getUser();
-
+    function Deconnexion()
+    {
+        $currentPage = "Connexion";
+        session_destroy();
         require('View/viewConnexion.php');
     }
 
@@ -33,30 +36,5 @@
         $resultat = $info->getInfo();
 
         require('view/ViewHome.php');
-    }
-
-    function verificationConnexion($username, $mdp)
-    {
-        $class = new Manager();
-
-        $resultat = $class->getUser();
-
-        while ($enregistrement=$resultat->fetch()){ 
-            if ($username == $enregistrement['nom_utilisateur'] && $mdp == $enregistrement['motPasse']) {
-               $_SESSION['connecter'] = $enregistrement['no_utilisateur'];
-               break;		  
-            }
-            else{ 
-               $_SESSION['connecter'] = 0;
-            }
-         }	
-      if($_SESSION['connecter'] != 0)
-      { 
-        Homepage();
-      }
-      else {
-        Connexion();
-        echo "Mauvais login";
-      }
     }
 ?>
