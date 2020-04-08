@@ -31,4 +31,10 @@
                                 "date" => $resultatFetch["date"], "quantite_produire" => $resultatFetch["quantite_produite"], "temperature" => $resultatFetch["temperature"],
                                  "humidite" => $resultatFetch["humidite"], "quantite_bon" => $resultatFetch["quantite_bon"], "quantite_bad" => $resultatFetch["quantite_mauvais"]));
     }
+
+    function Connexion()
+    {
+        $currentPage = "Connexion";
+        require('View/viewConnexion.php');
+    }
 ?>

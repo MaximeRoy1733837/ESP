@@ -4,7 +4,15 @@
     if (isset($_GET['event'])) {
 		switch ($_GET['event'] ) {
 			case 'GetNewInfo':
-				getLastInsertedInfo();
+				session_start();
+				if(isset($_SESSION['connecter']))
+				{
+					getLastInsertedInfo();
+				}
+				else
+				{
+					Connexion(); 
+				}
 				break;
 			case 'ValidateLogin':
 				//if(isset($_POST['nom_utilisateur']) && isset($_POST['mpd']))
@@ -17,6 +25,6 @@
 		}
 	}	
 	else {
-		Homepage(); 
+		Connexion(); 
 	}
 ?>
