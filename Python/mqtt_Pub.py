@@ -15,14 +15,14 @@ ifBloque = 0
 try:
     while True:
 
-        bloque = "non"
+        bloque = 0
         temperature = random.randint(18, 25)
         humidite = random.randint(18, 25)
         quantiteBon = quantiteBon + 10
         quantiteMauvais = quantiteMauvais + 2
         ifBloque = random.randint(0, 5)
         if ifBloque == 3:
-            bloque = "oui"
+            bloque = 1
 
         publish.single("Mecanium/ESP/Temps", str(datetime.datetime.now()), hostname="test.mosquitto.org")
         publish.single("Mecanium/ESP/Temperature", temperature, hostname="test.mosquitto.org")
