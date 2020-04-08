@@ -22,7 +22,6 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("Mecanium/ESP/Quantite_mauvais")
     client.subscribe("Mecanium/ESP/Bloque")
 
-
 def on_message(client, userdata, msg):
     dataArray.clear()
     print(msg.topic + " " + str(msg.payload.decode("utf-8")))
