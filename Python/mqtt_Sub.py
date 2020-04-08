@@ -47,7 +47,7 @@ def on_message(client, userdata, msg):
         if dataArray[5] >= dataArray[4]:
             print("Terminer")
             # mgsDate1 = str(datetime.fromtimestamp(float(dataArray[0])))
-            dataHistory = (dataArray[3], 0, dataArray[4], dataArray[1], dataArray[2], dataArray[5], dataArray[6])
+            dataHistory = (dataArray[3], dataArray[0], dataArray[4], dataArray[1], dataArray[2], dataArray[5], dataArray[6])
             connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
             cursor = connection.cursor(buffered=True)
             cursor.execute(add_history, dataHistory)
