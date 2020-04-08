@@ -88,6 +88,9 @@
     </div>
 
     <br>
+
+    <h4 id="mg_erreur" class="alert alert-danger d-none" role="alert"></h4>
+
     <br>
     <br>
 
