@@ -1,4 +1,5 @@
   var finCommande = false;
+  var bloque = false;
   
   $(document).ready(function(){
     setInterval(function(){
@@ -39,12 +40,39 @@
                   {
                     $('#progression').removeClass("bg-success")
                     window.finCommande = false;
+                    isItStuck(data["bloque"]);
                   }
                 }         
 
                 $('#progression').html(percent + '%');
                 $('#progression').attr('aria-valuenow', percent).css('width', percent + '%');
-          }
-        });
-    },1000);
+
+            }
+          });
+      },1000);
     });
+
+
+  function isItStuck(_data)
+  {
+    if(_data === "1")
+    {
+      if(window.bloque === false)
+      {
+        Swal.fire(
+          'Erreur',
+          'Bouchon coincé',
+          'error'
+        );
+        window.bloque = true;
+        $('#progression').addClass("bg-danger");
+        $('#mg_erreur').addClass("d-block");
+        $('#mg_erreur').html("Bouchon coincé!")
+      }
+    }
+    else{
+      window.bloque = false;
+      $('#progression').removeClass("bg-danger");
+      $('#mg_erreur').removeClass("d-block");
+    }
+  }
