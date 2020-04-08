@@ -11,6 +11,7 @@ CREATE TABLE `tbl_info` (
   `humidite` varchar(5) DEFAULT NULL,
   `quantite_bon` varchar(5) NOT NULL,
   `quantite_mauvais` varchar(5) NOT NULL,
+  `bloque` varchar(5) NOT NULL,
   PRIMARY KEY (`id`));
   
 CREATE TABLE `tbl_historique` (
