@@ -4,10 +4,10 @@ import paho.mqtt.publish as publish
 import random
 import sys
 
-temperature = 24
-humidite = 20
 commande = input("Entrez le nom de la commande : ")
 quantite = input("Entrez la quantite de bouchon a produire : ")
+temperature = 24
+humidite = 20
 quantiteBon = 0
 quantiteMauvais = 0
 ifBloque = 0
@@ -18,8 +18,8 @@ try:
         bloque = 0
         temperature = random.randint(18, 25)
         humidite = random.randint(18, 25)
-        quantiteBon = quantiteBon + 10
-        quantiteMauvais = quantiteMauvais + 2
+        quantiteBon = quantiteBon + random.randint(5, 15)
+        quantiteMauvais = quantiteMauvais + random.randint(0, 8)
         ifBloque = random.randint(0, 5)
         if ifBloque == 3:
             bloque = 1

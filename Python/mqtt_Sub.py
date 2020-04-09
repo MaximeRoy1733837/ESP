@@ -44,7 +44,6 @@ def on_message(client, userdata, msg):
         cursor.close()
         connection.close()
 
-        # 20 >= 150 ?
         if int(dataArray[5]) >= int(dataArray[4]):
             print("Terminer")
             # mgsDate1 = str(datetime.fromtimestamp(float(dataArray[0])))
