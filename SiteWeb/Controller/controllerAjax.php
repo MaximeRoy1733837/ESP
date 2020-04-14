@@ -38,4 +38,13 @@
         $currentPage = "Connexion";
         require('View/viewConnexion.php');
     }
+
+    function GetBasicInfo()
+    {
+        $class = new ManagerAjax();
+        $resultat = $class->getLastInsertedInfo();
+        $resultatFetch = $resultat->fetch();
+
+        echo json_encode(array("nom_commande" => $resultatFetch["nom_commande"], "quantite_produire" => $resultatFetch["quantite_produite"]));
+    }
 ?>

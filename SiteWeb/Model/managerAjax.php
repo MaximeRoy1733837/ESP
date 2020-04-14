@@ -20,6 +20,13 @@
            $resultat->execute();
            return $resultat;  
         }
+
+        public function GetBasicInfo()
+        {
+            $sql = 'select nom_commande, quantite_produite from tbl_info where id = (select max(id) from tbl_info)';
+            $resultat = self::getConnexion()->query($sql);
+            return $resultat;
+        }
     }
 
 ?>

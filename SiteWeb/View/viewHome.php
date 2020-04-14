@@ -13,12 +13,12 @@
         </div>
     </div>
 
-    <div class="card bg-light">
+    <!-- <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Date début production :</h5>
             <p id="date_debut" class="card-text text-center infoCard">4 avril 2020 12:45</p>
         </div>
-    </div>
+    </div> -->
 
     <div class="card bg-light">
         <div class="card-body">
@@ -90,6 +90,13 @@
     <br>
 
     <h4 id="mg_erreur" class="alert alert-danger d-none" role="alert"></h4>
+
+    <br>
+    <br>
+
+    <div class="container">
+        <canvas  id="DiagrammeTest"></canvas>
+    </div>
 
     <br>
     <br>

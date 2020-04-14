@@ -14,6 +14,9 @@
 					Connexion(); 
 				}
 				break;
+			case 'GetBasicInfo':
+				GetBasicInfo();
+				break;
 			case 'ValidateLogin':
 				if(isset($_POST['nom_utilisateur']) && isset($_POST['mdp']))
 				{
