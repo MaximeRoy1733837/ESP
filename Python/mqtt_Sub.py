@@ -15,10 +15,6 @@ def ajoutBD(data):
     connection.close()
 
 
-add_history = (
-    "INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
-    " VALUES (%s, %s, %s, %s, %s)")
-
 dataArray = []
 
 
@@ -43,29 +39,19 @@ def on_message(client, userdata, msg):
         #mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
         data = (0, dataArray[0], dataArray[2], 1, 1, dataArray[1])
         ajoutBD(data)
+
     elif msg.topic == "Mecanium/ESP/Humidite":
         data = (0, dataArray[0], dataArray[3], 1, 2, dataArray[1])
         ajoutBD(data)
-    elif msg.topic == "Mecanium/ESP/Quantite_mauvais":
-        data = (0, dataArray[0], dataArray[5], 1, 4, dataArray[1])
-        ajoutBD(data)
-        dataArray.clear()
+
     elif msg.topic == "Mecanium/ESP/Quantite_bon":
         data = (0, dataArray[0], dataArray[4], 1, 3, dataArray[1])
         ajoutBD(data)
 
-        if int(dataArray[5]) >= int(dataArray[4]):
-            print("Terminer")
-            # mgsDate1 = str(datetime.fromtimestamp(float(dataArray[0])))
-            dataHistory = (dataArray[0], dataArray[2], 1, 1, dataArray[1])
-            connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
-            cursor = connection.cursor(buffered=True)
-            cursor.execute(add_history, dataHistory)
-            connection.commit()
-            cursor.close()
-            connection.close()
-
-
+    elif msg.topic == "Mecanium/ESP/Quantite_mauvais":
+        data = (0, dataArray[0], dataArray[5], 1, 4, dataArray[1])
+        ajoutBD(data)
+        dataArray.clear()
 
 
 client = mqtt.Client()

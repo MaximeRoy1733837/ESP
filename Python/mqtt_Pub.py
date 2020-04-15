@@ -5,6 +5,10 @@ import random
 import sys
 import mysql.connector
 
+add_history = (
+    "INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
+    " VALUES (%s, %s, %s, %s, %s)")
+
 add_commande = (
     "INSERT INTO `tbl_commande` (`nom_commande`, `quantite_a_produire`)"
     " VALUES (%s, %s)")
@@ -53,6 +57,24 @@ try:
 
         if quantiteBon >= int(quantite):
             print("Terminer")
+            cpt = 1
+            while cpt <= 4:
+                if cpt == 1:
+                    dataHistory = (str(datetime.datetime.now()), temperature, 1, cpt, id_commande)
+                elif cpt == 2:
+                    dataHistory = (str(datetime.datetime.now()), humidite, 1, cpt, id_commande)
+                elif cpt == 3:
+                    dataHistory = (str(datetime.datetime.now()), quantiteBon, 1, cpt, id_commande)
+                elif cpt == 4:
+                    dataHistory = (str(datetime.datetime.now()), quantiteMauvais, 1, cpt, id_commande)
+
+                connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
+                cursor = connection.cursor(buffered=True)
+                cursor.execute(add_history, dataHistory)
+                connection.commit()
+                cursor.close()
+                connection.close()
+                cpt = cpt + 1
             sys.exit()
 
 except KeyboardInterrupt:
