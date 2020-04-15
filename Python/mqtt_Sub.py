@@ -6,10 +6,12 @@ add_commande = (
         "INSERT INTO `tbl_commande` (`nom_commande`, `quantite_a_produire`)"
         " VALUES (%s, %s)")
 
+
 def insert(add, data):
     connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
     cursor = connection.cursor(buffered=True)
     cursor.execute(add, data)
+    #fonction arrête ici: ne s'ajout pas dans la bd
     connection.commit()
     cursor.close()
     connection.close()
@@ -59,6 +61,9 @@ def on_message(client, userdata, msg):
 
     commande = 0
     id_commande = 0
+
+    #commande marche pas: la commande sajout plein de fois
+    #id_commande marche pas: reste toujours a 0
 
     if msg.topic == "Mecanium/ESP/Quantite_commande" and commande != 1:
         dataCommande = (dataArray[1], dataArray[2])
