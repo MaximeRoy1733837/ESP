@@ -90,9 +90,16 @@
   //     },1000);
   //   });
 
-  $(document).ready(DrawBasicInfoOrder());
+  $(document).ready(DrawOrderInfo());
 
-  function DrawBasicInfoOrder()
+  function DrawOrderInfo()
+  { 
+    DrawBasicInfo();
+    DrawQuantities();
+    DrawMesure();
+  }
+
+  function DrawBasicInfo()
   {
     $.ajax({
       url:'ajaxHandler.php?event=GetBasicInfo',
@@ -100,6 +107,65 @@
         var data = JSON.parse(output);
         $('#nom_commande').html(data["nom_commande"]);
         $('#quantite_produire').html(data["quantite_produire"]);
+      }
+    })
+  }
+
+  function DrawQuantities()
+  {
+    $.ajax({
+      url:'ajaxHandler.php?event=GetQuantities',
+      success: function(output) {
+        var data = JSON.parse(output);
+        $('#quantite_bon').html(data["quantite_bon"]);
+        $('#quantite_bad').html(data["quantite_mauvais"]); 
+
+        if (parseInt(data["quantite_produire"]) > 0)
+        {
+          updateProgressBar(parseInt(data["quantite_bon"]),parseInt(data["quantite_produire"]));
+        }
+      }
+    })
+  }
+
+  function updateProgressBar(_quantiteBon,_quantite_produire)
+  {
+    var percent = Math.round((_quantiteBon / _quantite_produire) * 100);
+                  
+    if(percent >= 100)
+    {
+      percent = 100;
+      $('#progression').addClass("bg-success");
+
+        if(window.finCommande === false)
+        {
+          Swal.fire(
+            'Succès',
+            'Commande terminé',
+            'success'
+          );
+          window.finCommande = true;
+        }       
+    }
+    else
+    {
+      $('#progression').removeClass("bg-success")
+      window.finCommande = false;
+      //isItStuck(data["bloque"]);
+    }         
+
+    $('#progression').html(percent + '%');
+    $('#progression').attr('aria-valuenow', percent).css('width', percent + '%');
+  }
+
+  function DrawMesure()
+  {
+    $.ajax({
+      url:'ajaxHandler.php?event=GetMesure',
+      success: function(output) {
+        var data = JSON.parse(output);
+        $('#temperature').html(data["temperature"]);
+        $('#humidite').html(data["humidite"]);;
       }
     })
   }
