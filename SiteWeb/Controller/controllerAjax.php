@@ -38,4 +38,32 @@
         $currentPage = "Connexion";
         require('View/viewConnexion.php');
     }
+
+    function GetBasicInfo()
+    {
+        $class = new ManagerAjax();
+        $resultat = $class->getOrderBasicInfo();
+        $resultatFetch = $resultat->fetch();
+
+        echo json_encode(array("nom_commande" => $resultatFetch["nom_commande"], "quantite_produire" => $resultatFetch["quantite_produite"]));
+    }
+
+    function GetQuantities()
+    {
+        $class = new ManagerAjax();
+        $resultat = $class->getOrderQuantities();
+        $resultatFetch = $resultat->fetch();
+
+        echo json_encode(array("quantite_bon" => $resultatFetch["quantite_bon"], "quantite_mauvais" => $resultatFetch["quantite_mauvais"],
+                                "quantite_produire" => $resultatFetch["quantite_produite"]));
+    }
+
+    function GetMesure()
+    {
+        $class = new ManagerAjax();
+        $resultat = $class->getOrderMesure();
+        $resultatFetch = $resultat->fetch();
+
+        echo json_encode(array("temperature" => $resultatFetch["temperature"], "humidite" => $resultatFetch["humidite"]));
+    }
 ?>

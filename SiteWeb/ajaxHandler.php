@@ -14,6 +14,15 @@
 					Connexion(); 
 				}
 				break;
+			case 'GetBasicInfo':
+				GetBasicInfo();
+				break;
+			case 'GetQuantities':
+				GetQuantities();
+				break;
+			case 'GetMesure':
+				GetMesure();
+				break;
 			case 'ValidateLogin':
 				if(isset($_POST['nom_utilisateur']) && isset($_POST['mdp']))
 				{

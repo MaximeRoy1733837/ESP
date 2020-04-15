@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="Plugin/jquery-validate-1.19.1/lib/jquery-3.1.1.js"></script>
 	<script type="text/javascript" src="Plugin/jquery-validate-1.19.1/dist/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="Plugin/jquery-validate-1.19.1/dist/localization/messages_fr.js"></script>
+    <script type="text/javascript" src="Plugin/Chart.bundle.min.js"></script>
 
 	<link rel="stylesheet" href="Plugin/bootstrap-4.4.1/css/bootstrap.min.css">
     <script type="text/javascript" src="Plugin/bootstrap-4.4.1/js/bootstrap.min.js"></script>
