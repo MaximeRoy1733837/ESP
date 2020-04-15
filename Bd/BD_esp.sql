@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `bd_esp` default CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `bd_esp`;
--- error 1215
+
 CREATE TABLE `tbl_info` (
   `id_info` int(11) NOT NULL AUTO_INCREMENT,
   `epoch` varchar(35) NOT NULL,
@@ -128,6 +128,7 @@ end|
 -- select * FROM tbl_historique
 -- select * FROM tbl_utilisateur
 -- select * FROM tbl_capteur
+-- select * FROM tbl_commande
 -- select * FROM tbl_machine
 -- select * FROM tbl_evenement
 -- select * FROM tbl_type_evenement

@@ -2,13 +2,22 @@ import paho.mqtt.client as mqtt
 import mysql.connector
 from datetime import datetime, date
 
-add_info = (
-    "INSERT INTO `tbl_info` (`epoch`, `nom_commande`, `date`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`, `bloque`)"
-    " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+
+def ajoutBD(data):
+    add_info = (
+        "INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
+        " VALUES (%s, %s, %s, %s, %s, %s)")
+    connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
+    cursor = connection.cursor(buffered=True)
+    cursor.execute(add_info, data)
+    connection.commit()
+    cursor.close()
+    connection.close()
+
 
 add_history = (
-    "INSERT INTO `tbl_historique` (`nom_commande`, `date_historique`, `quantite_produite`, `temperature`, `humidite`, `quantite_bon`, `quantite_mauvais`)"
-    " VALUES (%s, %s, %s, %s, %s, %s, %s)")
+    "INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
+    " VALUES (%s, %s, %s, %s, %s)")
 
 dataArray = []
 
@@ -17,13 +26,12 @@ def on_connect(client, userdata, flags, rc):
     # print("Connected with result code " + str(rc))
     print("Connecté sans erreur.")
     client.subscribe("Mecanium/ESP/Temps")
+    client.subscribe("Mecanium/ESP/Commande")
     client.subscribe("Mecanium/ESP/Temperature")
     client.subscribe("Mecanium/ESP/Humidite")
-    client.subscribe("Mecanium/ESP/Commande")
-    client.subscribe("Mecanium/ESP/Quantite")
     client.subscribe("Mecanium/ESP/Quantite_bon")
     client.subscribe("Mecanium/ESP/Quantite_mauvais")
-    client.subscribe("Mecanium/ESP/Bloque")
+    #client.subscribe("Mecanium/ESP/Bloque")
 
 
 def on_message(client, userdata, msg):
@@ -31,23 +39,25 @@ def on_message(client, userdata, msg):
 
     dataArray.append(str(msg.payload.decode("utf-8")))
 
-    if msg.topic == "Mecanium/ESP/Bloque":
-        # humidite = str(msg.payload.decode("utf-8"))
+    if msg.topic == "Mecanium/ESP/Temperature":
         #mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
-        data = (
-            0, dataArray[3], dataArray[0], dataArray[4], dataArray[1], dataArray[2], dataArray[5], dataArray[6],
-            dataArray[7])
-        connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
-        cursor = connection.cursor(buffered=True)
-        cursor.execute(add_info, data)
-        connection.commit()
-        cursor.close()
-        connection.close()
+        data = (0, dataArray[0], dataArray[2], 1, 1, dataArray[1])
+        ajoutBD(data)
+    elif msg.topic == "Mecanium/ESP/Humidite":
+        data = (0, dataArray[0], dataArray[3], 1, 2, dataArray[1])
+        ajoutBD(data)
+    elif msg.topic == "Mecanium/ESP/Quantite_mauvais":
+        data = (0, dataArray[0], dataArray[5], 1, 4, dataArray[1])
+        ajoutBD(data)
+        dataArray.clear()
+    elif msg.topic == "Mecanium/ESP/Quantite_bon":
+        data = (0, dataArray[0], dataArray[4], 1, 3, dataArray[1])
+        ajoutBD(data)
 
         if int(dataArray[5]) >= int(dataArray[4]):
             print("Terminer")
             # mgsDate1 = str(datetime.fromtimestamp(float(dataArray[0])))
-            dataHistory = (dataArray[3], dataArray[0], dataArray[4], dataArray[1], dataArray[2], dataArray[5], dataArray[6])
+            dataHistory = (dataArray[0], dataArray[2], 1, 1, dataArray[1])
             connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
             cursor = connection.cursor(buffered=True)
             cursor.execute(add_history, dataHistory)
@@ -55,7 +65,7 @@ def on_message(client, userdata, msg):
             cursor.close()
             connection.close()
 
-        dataArray.clear()
+
 
 
 client = mqtt.Client()
