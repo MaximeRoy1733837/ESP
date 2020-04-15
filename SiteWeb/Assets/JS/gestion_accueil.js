@@ -1,4 +1,4 @@
-  var finCommande = false;
+  var finCommande = 0;
   var bloque = false;
   
   // var Diagramme = document.getElementById('DiagrammeTest').getContext('2d');
@@ -97,6 +97,9 @@
     DrawBasicInfo();
     DrawQuantities();
     DrawMesure();
+
+    window.finCommande = setInterval(DrawQuantities, 1000);
+    var updateMesure = setInterval(DrawMesure, 1000);
   }
 
   function DrawBasicInfo()
@@ -122,13 +125,13 @@
 
         if (parseInt(data["quantite_produire"]) > 0)
         {
-          updateProgressBar(parseInt(data["quantite_bon"]),parseInt(data["quantite_produire"]));
+          UpdateProgressBar(parseInt(data["quantite_bon"]),parseInt(data["quantite_produire"]));
         }
       }
     })
   }
 
-  function updateProgressBar(_quantiteBon,_quantite_produire)
+  function UpdateProgressBar(_quantiteBon,_quantite_produire)
   {
     var percent = Math.round((_quantiteBon / _quantite_produire) * 100);
                   
@@ -137,21 +140,26 @@
       percent = 100;
       $('#progression').addClass("bg-success");
 
-        if(window.finCommande === false)
+        if(window.finCommande === 1)
         {
           Swal.fire(
             'Succès',
             'Commande terminé',
             'success'
           );
-          window.finCommande = true;
+          clearInterval(finCommande);
+          window.finCommande = 0;
+          //clearInterval(updateQuantities);
         }       
     }
     else
     {
-      $('#progression').removeClass("bg-success")
-      window.finCommande = false;
-      //isItStuck(data["bloque"]);
+      if(window.finCommande === 0)
+      {
+        $('#progression').removeClass("bg-success")
+        window.finCommande = setInterval(DrawQuantities, 1000);
+      }
+      //IsItStuck(data["bloque"]);
     }         
 
     $('#progression').html(percent + '%');
@@ -170,7 +178,7 @@
     })
   }
 
-  function isItStuck(_data)
+  function IsItStuck(_data)
   {
     if(_data === "1")
     {
@@ -191,5 +199,11 @@
       window.bloque = false;
       $('#progression').removeClass("bg-danger");
       $('#mg_erreur').removeClass("d-block");
+    }
+
+    function StopUpdating()
+    {
+      clearInterval(window.finCommande);
+      window.finCommande = 0;
     }
   }
