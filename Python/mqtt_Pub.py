@@ -5,9 +5,6 @@ import random
 import sys
 import mysql.connector
 
-add_history = (
-    "INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
-    " VALUES (%s, %s, %s, %s, %s)")
 
 add_commande = (
     "INSERT INTO `tbl_commande` (`nom_commande`, `quantite_a_produire`)"
@@ -68,12 +65,7 @@ try:
                 elif cpt == 4:
                     dataHistory = (str(datetime.datetime.now()), quantiteMauvais, 1, cpt, id_commande)
 
-                connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
-                cursor = connection.cursor(buffered=True)
-                cursor.execute(add_history, dataHistory)
-                connection.commit()
-                cursor.close()
-                connection.close()
+                insertHistory(dataHistory)
                 cpt = cpt + 1
             sys.exit()
 

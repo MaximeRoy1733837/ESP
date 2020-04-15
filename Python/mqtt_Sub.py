@@ -3,16 +3,34 @@ import mysql.connector
 from datetime import datetime, date
 
 
-def ajoutBD(data):
-    add_info = (
-        "INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
-        " VALUES (%s, %s, %s, %s, %s, %s)")
+def insert(add, data):
     connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
     cursor = connection.cursor(buffered=True)
-    cursor.execute(add_info, data)
+    cursor.execute(add, data)
     connection.commit()
     cursor.close()
     connection.close()
+
+
+def insertInfo(data_info):
+    add_info = (
+        "INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
+        " VALUES (%s, %s, %s, %s, %s, %s)")
+    insert(add_info, data_info)
+
+
+def insertHistory(dataHistory):
+    add_history = (
+        "INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`, `id_commande`)"
+        " VALUES (%s, %s, %s, %s, %s)")
+    insert(add_history, dataHistory)
+
+
+def insertEvent(dataEvent):
+    add_event = (
+        "INSERT INTO `tbl_evenement` (`date_evenement`, `id_machine`, `id_type_evenement`)"
+        " VALUES (%s, %s, %s)")
+    insert(add_event, dataEvent)
 
 
 dataArray = []
@@ -37,20 +55,20 @@ def on_message(client, userdata, msg):
 
     if msg.topic == "Mecanium/ESP/Temperature":
         #mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
-        data = (0, dataArray[0], dataArray[2], 1, 1, dataArray[1])
-        ajoutBD(data)
+        data_info = (0, dataArray[0], dataArray[2], 1, 1, dataArray[1])
+        insertInfo(data_info)
 
     elif msg.topic == "Mecanium/ESP/Humidite":
-        data = (0, dataArray[0], dataArray[3], 1, 2, dataArray[1])
-        ajoutBD(data)
+        data_info = (0, dataArray[0], dataArray[3], 1, 2, dataArray[1])
+        insertInfo(data_info)
 
     elif msg.topic == "Mecanium/ESP/Quantite_bon":
-        data = (0, dataArray[0], dataArray[4], 1, 3, dataArray[1])
-        ajoutBD(data)
+        data_info = (0, dataArray[0], dataArray[4], 1, 3, dataArray[1])
+        insertInfo(data_info)
 
     elif msg.topic == "Mecanium/ESP/Quantite_mauvais":
-        data = (0, dataArray[0], dataArray[5], 1, 4, dataArray[1])
-        ajoutBD(data)
+        data_info = (0, dataArray[0], dataArray[5], 1, 4, dataArray[1])
+        insertInfo(data_info)
         dataArray.clear()
 
 
