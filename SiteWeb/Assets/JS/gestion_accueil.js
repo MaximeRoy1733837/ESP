@@ -1,5 +1,9 @@
-  var finCommande = 0;
+  var endOrder = false;
   var bloque = false;
+  var orderName = "";
+  var updateNameOrder = 0;
+  var updateQuantities = 0;
+
   
   // var Diagramme = document.getElementById('DiagrammeTest').getContext('2d');
   // var PopDiagramme = new Chart(Diagramme, {
@@ -94,12 +98,13 @@
 
   function DrawOrderInfo()
   { 
+
     DrawBasicInfo();
     DrawQuantities();
     DrawMesure();
 
-    window.finCommande = setInterval(DrawQuantities, 1000);
-    var updateMesure = setInterval(DrawMesure, 1000);
+    StartUpdatingQuantities();
+    var updateMesure = setInterval(DrawMesure, 5000);
   }
 
   function DrawBasicInfo()
@@ -110,6 +115,20 @@
         var data = JSON.parse(output);
         $('#nom_commande').html(data["nom_commande"]);
         $('#quantite_produire').html(data["quantite_produire"]);
+
+        if(window.endOrder == false)
+        {
+          window.orderName = data["nom_commande"];
+        }
+        else
+        {
+          if(window.orderName != data["nom_commande"])
+          {
+            StopUpdatingOrderName();
+            StartUpdatingQuantities();
+          }
+        }
+        
       }
     })
   }
@@ -140,31 +159,54 @@
       percent = 100;
       $('#progression').addClass("bg-success");
 
-        if(window.finCommande === 1)
+        
+
+        if(window.endOrder === false)
         {
           Swal.fire(
             'Succès',
             'Commande terminé',
             'success'
           );
-          clearInterval(finCommande);
-          window.finCommande = 0;
-          //clearInterval(updateQuantities);
+
+          window.endOrder = true;
+          StopUpdatingQuantities();
+          StartUpdatingOrderName();
         }       
     }
     else
-    {
-      if(window.finCommande === 0)
-      {
-        $('#progression').removeClass("bg-success")
-        window.finCommande = setInterval(DrawQuantities, 1000);
-      }
+    {  
+      $('#progression').removeClass("bg-success")
+      window.endOrder = false;
       //IsItStuck(data["bloque"]);
     }         
 
     $('#progression').html(percent + '%');
     $('#progression').attr('aria-valuenow', percent).css('width', percent + '%');
   }
+
+  function StopUpdatingQuantities()
+  {
+    clearInterval(window.updateQuantities);
+    window.updateQuantities = 0;
+  }
+
+  function StartUpdatingQuantities()
+  {
+    window.updateQuantities = setInterval(DrawQuantities, 1000)
+  }
+
+  function StartUpdatingOrderName()
+  {
+    window.updateNameOrder = setInterval(DrawBasicInfo, 1000)
+  }
+
+  function StopUpdatingOrderName()
+  {
+    clearInterval(window.updateNameOrder);
+    window.updateNameOrder = 0;
+  }
+
 
   function DrawMesure()
   {
@@ -199,11 +241,5 @@
       window.bloque = false;
       $('#progression').removeClass("bg-danger");
       $('#mg_erreur').removeClass("d-block");
-    }
-
-    function StopUpdating()
-    {
-      clearInterval(window.finCommande);
-      window.finCommande = 0;
     }
   }
