@@ -2,6 +2,9 @@ import paho.mqtt.client as mqtt
 import mysql.connector
 from datetime import datetime, date
 
+commande = 0
+id_commande = 0
+
 add_commande = (
         "INSERT INTO `tbl_commande` (`nom_commande`, `quantite_a_produire`)"
         " VALUES (%s, %s)")
@@ -11,7 +14,6 @@ def insert(add, data):
     connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
     cursor = connection.cursor(buffered=True)
     cursor.execute(add, data)
-    #fonction arrête ici: ne s'ajout pas dans la bd
     connection.commit()
     cursor.close()
     connection.close()
@@ -51,7 +53,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("Mecanium/ESP/Humidite")
     client.subscribe("Mecanium/ESP/Quantite_bon")
     client.subscribe("Mecanium/ESP/Quantite_mauvais")
-    #client.subscribe("Mecanium/ESP/Bloque")
+    client.subscribe("Mecanium/ESP/Bloque")
 
 
 def on_message(client, userdata, msg):
@@ -59,13 +61,11 @@ def on_message(client, userdata, msg):
 
     dataArray.append(str(msg.payload.decode("utf-8")))
 
-    commande = 0
-    id_commande = 0
-
-    #commande marche pas: la commande sajout plein de fois
-    #id_commande marche pas: reste toujours a 0
+    global commande
+    global id_commande
 
     if msg.topic == "Mecanium/ESP/Quantite_commande" and commande != 1:
+        commande = 1
         dataCommande = (dataArray[1], dataArray[2])
         connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
         cursor = connection.cursor(buffered=True)
@@ -74,7 +74,6 @@ def on_message(client, userdata, msg):
         connection.commit()
         cursor.close()
         connection.close()
-        commande = 1
 
     if msg.topic == "Mecanium/ESP/Temperature":
         #mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
@@ -92,6 +91,18 @@ def on_message(client, userdata, msg):
     elif msg.topic == "Mecanium/ESP/Quantite_mauvais":
         data_info = (0, dataArray[0], dataArray[6], 1, 4, id_commande)
         insertInfo(data_info)
+
+    elif msg.topic == "Mecanium/ESP/Bloque":
+
+        if int(dataArray[7]) == 5:
+            dataEvent = (dataArray[0], 1, 1)
+            insertEvent(dataEvent)
+        elif int(dataArray[7]) == 10:
+            dataEvent = (dataArray[0], 1, 2)
+            insertEvent(dataEvent)
+        elif int(dataArray[7]) == 15:
+            dataEvent = (dataArray[0], 1, 3)
+            insertEvent(dataEvent)
 
         if int(dataArray[5]) >= int(dataArray[2]):
             cpt = 1
