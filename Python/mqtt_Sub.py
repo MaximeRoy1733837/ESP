@@ -9,6 +9,7 @@ add_commande = (
         "INSERT INTO `tbl_commande` (`nom_commande`, `quantite_a_produire`)"
         " VALUES (%s, %s)")
 
+dataArray = []
 
 def insert(add, data):
     connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
@@ -38,9 +39,6 @@ def insertEvent(dataEvent):
         "INSERT INTO `tbl_evenement` (`date_evenement`, `id_machine`, `id_type_evenement`)"
         " VALUES (%s, %s, %s)")
     insert(add_event, dataEvent)
-
-
-dataArray = []
 
 
 def on_connect(client, userdata, flags, rc):
@@ -78,20 +76,12 @@ def on_message(client, userdata, msg):
     if msg.topic == "Mecanium/ESP/Temperature":
         #mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
         data_info = (0, dataArray[0], dataArray[3], 1, 1, id_commande)
-        insertInfo(data_info)
-
     elif msg.topic == "Mecanium/ESP/Humidite":
         data_info = (0, dataArray[0], dataArray[4], 1, 2, id_commande)
-        insertInfo(data_info)
-
     elif msg.topic == "Mecanium/ESP/Quantite_bon":
         data_info = (0, dataArray[0], dataArray[5], 1, 3, id_commande)
-        insertInfo(data_info)
-
     elif msg.topic == "Mecanium/ESP/Quantite_mauvais":
         data_info = (0, dataArray[0], dataArray[6], 1, 4, id_commande)
-        insertInfo(data_info)
-
     elif msg.topic == "Mecanium/ESP/Bloque":
 
         if int(dataArray[7]) == 5:
@@ -103,6 +93,8 @@ def on_message(client, userdata, msg):
         elif int(dataArray[7]) == 15:
             dataEvent = (dataArray[0], 1, 3)
             insertEvent(dataEvent)
+
+        #insertEvent(dataEvent)
 
         if int(dataArray[5]) >= int(dataArray[2]):
             cpt = 1
@@ -121,6 +113,8 @@ def on_message(client, userdata, msg):
                 cpt = cpt + 1
 
         dataArray.clear()
+
+    insertInfo(data_info)
 
 
 client = mqtt.Client()
