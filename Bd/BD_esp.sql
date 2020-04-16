@@ -82,9 +82,14 @@ INSERT INTO `tbl_commande` (`nom_commande`,`quantite_a_produire`)
 				('bouchon jaune',40);
                 
 INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
-		VALUES 	(1583863424,'Jeudi 2 avril 3:52:16',75,1,1,1),
-				(1583863453,'Vendredi 3 avril 13:52:07',20,1,2,1),
-                (1583863460,'Samedi 4 avril 18:52:42',160,1,3,2);
+		VALUES 	(1583863424,'Jeudi 2 avril 3:52:16',22,1,1,1),
+				(1583863453,'Vendredi 3 avril 13:52:07',24,1,2,1),
+                (1583863460,'Samedi 4 avril 18:52:42',150,1,3,1),
+                (1583863462,'Dimanche 5 avril 13:20:07',15,1,4,1),
+                (1583863480,'Jeudi 2 avril 3:52:16',25,1,1,2),
+				(1583863484,'Vendredi 3 avril 13:52:07',20,1,2,2),
+                (1583863490,'Samedi 4 avril 18:52:42',70,1,3,2),
+                (1583863495,'Dimanche 5 avril 13:20:07',2,1,4,2);
                 
 INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
 		VALUES 	('Lundi 6 avril 13:52',24,1,1,1),
@@ -120,9 +125,45 @@ begin
     where nom_utilisateur = _nom and motPasse = password(_mpd);
 end|
 
+delimiter |
+create procedure getBasicInfo()
+begin
+	select nom_commande, quantite_a_produire
+    from tbl_commande
+    where id_commande = (select max(id_commande) from tbl_commande);
+end|
+
+delimiter |
+create procedure getQuantities()
+begin
+	select valeur_capteur, quantite_a_produire
+    from tbl_info inner join tbl_commande
+    on tbl_info.id_commande = tbl_info.id_commande
+    inner join tbl_capteur
+    on tbl_info.id_capteur = tbl_capteur.id_capteur
+    where (tbl_capteur.nom_capteur in ('bon','mauvais')) and (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and quantite_a_produire =
+    (select tbl_commande.quantite_a_produire from tbl_commande where id_commande = (select max(id_commande) from tbl_commande));
+    -- group by tbl_capteur.id_capteur
+end|
+
+delimiter |
+create procedure getMesure()
+begin
+	select valeur_capteur
+    from tbl_info inner join tbl_commande
+    on tbl_info.id_commande = tbl_info.id_commande
+    inner join tbl_capteur
+    on tbl_info.id_capteur = tbl_capteur.id_capteur
+    where (tbl_capteur.nom_capteur in ('temperature','humidite')) and (tbl_info.id_commande = (select max(id_commande) from tbl_commande))
+    group by tbl_capteur.id_capteur;
+end|
+
 -- drop database bd_esp
 -- drop procedure getLastInsertedInfo
 -- drop procedure VerificationLogin
+-- drop procedure getBasicInfo
+-- drop procedure getQuantities
+-- drop procedure getMesure
 
 -- select * FROM tbl_info
 -- select * FROM tbl_historique

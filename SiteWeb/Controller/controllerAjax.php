@@ -45,25 +45,34 @@
         $resultat = $class->getOrderBasicInfo();
         $resultatFetch = $resultat->fetch();
 
-        echo json_encode(array("nom_commande" => $resultatFetch["nom_commande"], "quantite_produire" => $resultatFetch["quantite_produite"]));
+        echo json_encode(array("nom_commande" => $resultatFetch["nom_commande"], "quantite_produire" => $resultatFetch["quantite_a_produire"]));
     }
 
     function GetQuantities()
     {
         $class = new ManagerAjax();
         $resultat = $class->getOrderQuantities();
-        $resultatFetch = $resultat->fetch();
+        $data = array();
 
-        echo json_encode(array("quantite_bon" => $resultatFetch["quantite_bon"], "quantite_mauvais" => $resultatFetch["quantite_mauvais"],
-                                "quantite_produire" => $resultatFetch["quantite_produite"]));
+        while($resultatFetch = $resultat->fetch())
+        {
+           array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["quantite_a_produire"]);
+        }
+
+        echo json_encode($data);
     }
 
     function GetMesure()
     {
         $class = new ManagerAjax();
         $resultat = $class->getOrderMesure();
-        $resultatFetch = $resultat->fetch();
+        $data = array();
 
-        echo json_encode(array("temperature" => $resultatFetch["temperature"], "humidite" => $resultatFetch["humidite"]));
+        while($resultatFetch = $resultat->fetch())
+        {
+           array_push($data, $resultatFetch["valeur_capteur"]);
+        }
+
+        echo json_encode($data);
     }
 ?>

@@ -23,22 +23,25 @@
 
         public function getOrderBasicInfo()
         {
-            $sql = 'select nom_commande, quantite_produite from tbl_info where id = (select max(id) from tbl_info)';
-            $resultat = self::getConnexion()->query($sql);
+            $sql = 'call getBasicInfo';
+            $resultat = self::getConnexion()->prepare($sql);
+            $resultat->execute();
             return $resultat;
         }
 
         public function getOrderQuantities()
         {
-            $sql = 'select quantite_bon, quantite_mauvais, quantite_produite from tbl_info where id = (select max(id) from tbl_info)';
-            $resultat = self::getConnexion()->query($sql);
+            $sql = 'call getQuantities';
+            $resultat = self::getConnexion()->prepare($sql);
+            $resultat->execute();
             return $resultat;
         }
 
         public function getOrderMesure()
         {
-            $sql = 'select temperature, humidite from tbl_info where id = (select max(id) from tbl_info)';
-            $resultat = self::getConnexion()->query($sql);
+            $sql = 'call getMesure';
+            $resultat = self::getConnexion()->prepare($sql);
+            $resultat->execute();
             return $resultat;
         }
     }

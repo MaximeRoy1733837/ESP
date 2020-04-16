@@ -139,12 +139,12 @@
       url:'ajaxHandler.php?event=GetQuantities',
       success: function(output) {
         var data = JSON.parse(output);
-        $('#quantite_bon').html(data["quantite_bon"]);
-        $('#quantite_bad').html(data["quantite_mauvais"]); 
+        $('#quantite_bon').html(data[0]);
+        $('#quantite_bad').html(data[2]); 
 
-        if (parseInt(data["quantite_produire"]) > 0)
+        if (parseInt(data[1]) > 0)
         {
-          UpdateProgressBar(parseInt(data["quantite_bon"]),parseInt(data["quantite_produire"]));
+          UpdateProgressBar(parseInt(data[0]),parseInt(data[1]));
         }
       }
     })
@@ -214,8 +214,8 @@
       url:'ajaxHandler.php?event=GetMesure',
       success: function(output) {
         var data = JSON.parse(output);
-        $('#temperature').html(data["temperature"]);
-        $('#humidite').html(data["humidite"]);;
+        $('#temperature').html(data[0]);
+        $('#humidite').html(data[1]);;
       }
     })
   }
