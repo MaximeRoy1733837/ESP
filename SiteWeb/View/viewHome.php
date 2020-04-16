@@ -30,7 +30,7 @@
     <br>
 
     <h4 class="alert alert-primary" role="alert">Mesure</h4>
-    <h5 class="lastUpdateDate"></h5>
+    <h5 class="lastUpdateDate" id="lastUpdateMesure"></h5>
 
     <div class="row">
 
@@ -57,7 +57,7 @@
     <br>
 
     <h4 class="alert alert-primary" role="alert">Quantité production</h4>
-    <h5 class="lastUpdateDate"></h5>
+    <h5 class="lastUpdateDate" id="lastUpdateQuantities"></h5>
 
     <div class="row">
 

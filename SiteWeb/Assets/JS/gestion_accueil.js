@@ -104,7 +104,7 @@
     DrawMesure();
 
     StartUpdatingQuantities();
-    var updateMesure = setInterval(DrawMesure, 5000);
+    updateMesure = setInterval(DrawMesure, 5000);
   }
 
   function DrawBasicInfo()
@@ -140,7 +140,8 @@
       success: function(output) {
         var data = JSON.parse(output);
         $('#quantite_bon').html(data[0]);
-        $('#quantite_bad').html(data[2]); 
+        $('#quantite_bad').html(data[3]);
+        $('#lastUpdateQuantities').html('Dernière mise à jour: ' + data[5]);
 
         if (parseInt(data[1]) > 0)
         {
@@ -215,7 +216,8 @@
       success: function(output) {
         var data = JSON.parse(output);
         $('#temperature').html(data[0]);
-        $('#humidite').html(data[1]);;
+        $('#humidite').html(data[2]);;
+        $('#lastUpdateMesure').html('Dernière mise à jour: ' + data[3]);
       }
     })
   }

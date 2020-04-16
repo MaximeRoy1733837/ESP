@@ -56,9 +56,10 @@
 
         while($resultatFetch = $resultat->fetch())
         {
-           array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["quantite_a_produire"]);
+           array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["quantite_a_produire"], $resultatFetch["date"] );
         }
 
+        $resultat->closeCursor();
         echo json_encode($data);
     }
 
@@ -70,9 +71,10 @@
 
         while($resultatFetch = $resultat->fetch())
         {
-           array_push($data, $resultatFetch["valeur_capteur"]);
+           array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["date"]);
         }
 
+        $resultat->closeCursor();
         echo json_encode($data);
     }
 ?>
