@@ -171,7 +171,7 @@ begin
     on tbl_historique.id_commande = tbl_commande.id_commande
     inner join tbl_capteur
     on tbl_historique.id_capteur = tbl_capteur.id_capteur
-    order by tbl_historique.id_commande, tbl_historique.id_capteur;
+    order by tbl_historique.id_commande desc, tbl_historique.id_capteur asc;
 end|
 
 -- drop database bd_esp
