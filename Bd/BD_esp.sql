@@ -92,14 +92,14 @@ INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_cap
                 (1583863495,'Vendredi 3 avril 13:52:02',2,1,4,2);
                 
 INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
-		VALUES 	('Lundi 6 avril 13:52',24,1,1,1),
+		VALUES 	('Lundi 6 avril 13:52',22,1,1,1),
 				('Lundi 6 avril 13:52',20,1,2,1),
-                ('Lundi 6 avril 13:52',150,1,3,1),
-				('Lundi 6 avril 13:52',2,1,2,1),
+                ('Lundi 6 avril 13:52',35,1,3,1),
+				('Lundi 6 avril 13:52',6,1,4,1),
                 ('Lundi 6 avril 13:52',24,1,1,2),
 				('Lundi 6 avril 13:52',20,1,2,2),
-                ('Lundi 6 avril 13:52',150,1,1,2),
-				('Lundi 6 avril 13:52',2,1,2,2);
+                ('Lundi 6 avril 13:52',150,1,3,2),
+				('Lundi 6 avril 13:52',2,1,4,2);
 
 INSERT INTO `tbl_type_evenement` (`nom_evenement`)
 		VALUES 	('manque_bouchon'),
