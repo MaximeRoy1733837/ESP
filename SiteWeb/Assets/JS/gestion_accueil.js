@@ -36,7 +36,7 @@
   //           display: true,
   //           scaleLabel: {
   //             display: true,
-  //             labelString: 'Quantite par sec'
+  //             labelString: 'Quantite par minute'
   //           }
   //         }]
   //       }
