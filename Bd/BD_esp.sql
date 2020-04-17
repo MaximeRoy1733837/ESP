@@ -88,7 +88,7 @@ INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_cap
                 (1583863462,'Jeudi 2 avril 3:52:16',15,1,4,1),
                 (1583863480,'Vendredi 3 avril 13:52:07',25,1,1,2),
 				(1583863484,'Vendredi 3 avril 13:52:08',20,1,2,2),
-                (1583863490,'Vendredi 3 avril 13:52:01',35,1,3,2),
+                (1583863490,'Vendredi 3 avril 13:52:01',40,1,3,2),
                 (1583863495,'Vendredi 3 avril 13:52:02',2,1,4,2);
                 
 INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
@@ -142,25 +142,26 @@ end|
 delimiter |
 create procedure getQuantities()
 begin
-	select valeur_capteur, quantite_a_produire, date
+	select distinct(valeur_capteur), quantite_a_produire, date
     from tbl_info inner join tbl_commande
     on tbl_info.id_commande = tbl_info.id_commande
     inner join tbl_capteur
     on tbl_info.id_capteur = tbl_capteur.id_capteur
-    where (tbl_capteur.nom_capteur in ('bon','mauvais')) and (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and quantite_a_produire =
-    (select tbl_commande.quantite_a_produire from tbl_commande where id_commande = (select max(id_commande) from tbl_commande));
+    where (tbl_capteur.nom_capteur in ('bon','mauvais')) and (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and (quantite_a_produire =
+    (select tbl_commande.quantite_a_produire from tbl_commande where id_commande = (select max(id_commande) from tbl_commande)))
+    order by tbl_info.id_info desc limit 2;
 end|
 
 delimiter |
 create procedure getMesure()
 begin
-	select valeur_capteur, date
+	select distinct(valeur_capteur), date
     from tbl_info inner join tbl_commande
     on tbl_info.id_commande = tbl_info.id_commande
     inner join tbl_capteur
     on tbl_info.id_capteur = tbl_capteur.id_capteur
     where (tbl_capteur.nom_capteur in ('temperature','humidite')) and (tbl_info.id_commande = (select max(id_commande) from tbl_commande))
-    group by tbl_capteur.id_capteur;
+    group by tbl_info.id_info desc limit 2;
 end|
 
 delimiter |

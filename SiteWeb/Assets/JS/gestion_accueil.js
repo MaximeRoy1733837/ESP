@@ -68,20 +68,20 @@
   //                   percent = 100;
   //                   $('#progression').addClass("bg-success");
 
-  //                     if(window.finCommande === false)
+  //                     if(finCommande === false)
   //                     {
   //                       Swal.fire(
   //                         'Succès',
   //                         'Commande terminé',
   //                         'success'
   //                       );
-  //                       window.finCommande = true;
+  //                       finCommande = true;
   //                     }       
   //                 }
   //                 else
   //                 {
   //                   $('#progression').removeClass("bg-success")
-  //                   window.finCommande = false;
+  //                   finCommande = false;
   //                   isItStuck(data["bloque"]);
   //                 }
   //               }         
@@ -96,15 +96,37 @@
 
   $(document).ready(DrawOrderInfo());
 
-  function DrawOrderInfo()
-  { 
+  function StartUpdatingQuantities()
+  {
+    updateQuantities = setInterval(DrawQuantities, 1000);
+  }
 
+  function StopUpdatingOrderName()
+  {
+    clearInterval(updateNameOrder);
+    updateNameOrder = 0;
+  }
+
+  function StopUpdatingQuantities()
+  {
+    clearInterval(updateQuantities);
+    updateQuantities = 0;
+  }
+
+  function StartUpdatingOrderName()
+  {
+    updateNameOrder = setInterval(DrawBasicInfo, 1000);
+  }
+
+  function DrawOrderInfo()
+  {
+    StartUpdatingQuantities();
     DrawBasicInfo();
-    DrawQuantities();
+    //DrawQuantities();
     DrawMesure();
 
-    StartUpdatingQuantities();
-    updateMesure = setInterval(DrawMesure, 5000);
+    
+    updateMesure = setInterval(DrawMesure, 3000);
   }
 
   function DrawBasicInfo()
@@ -114,18 +136,22 @@
       success: function(output) {
         var data = JSON.parse(output);
         $('#nom_commande').html(data["nom_commande"]);
-        $('#quantite_produire').html(data["quantite_produire"]);
+        $('#quantite_produire').html(data["quantite_a_produire"]);
 
-        if(window.endOrder == false)
+        if(endOrder === false)
         {
-          window.orderName = data["nom_commande"];
+          orderName = data["nom_commande"];
         }
         else
         {
-          if(window.orderName != data["nom_commande"])
+          if(orderName !== data["nom_commande"])
           {
-            StopUpdatingOrderName();
-            StartUpdatingQuantities();
+            if(updateQuantities == 0)
+            {
+              StopUpdatingOrderName();
+              StartUpdatingQuantities();
+            }
+            
           }
         }
         
@@ -139,13 +165,13 @@
       url:'ajaxHandler.php?event=GetQuantities',
       success: function(output) {
         var data = JSON.parse(output);
-        $('#quantite_bon').html(data[0]);
-        $('#quantite_bad').html(data[3]);
+        $('#quantite_bon').html(data[3]);
+        $('#quantite_bad').html(data[0]);
         $('#lastUpdateQuantities').html('Dernière mise à jour: ' + data[5]);
 
         if (parseInt(data[1]) > 0)
         {
-          UpdateProgressBar(parseInt(data[0]),parseInt(data[1]));
+          UpdateProgressBar(parseInt(data[3]),parseInt(data[1]));
         }
       }
     })
@@ -158,11 +184,9 @@
     if(percent >= 100)
     {
       percent = 100;
-      $('#progression').addClass("bg-success");
+      $('#progression').addClass("bg-success");   
 
-        
-
-        if(window.endOrder === false)
+        if(endOrder === false)
         {
           Swal.fire(
             'Succès',
@@ -170,15 +194,18 @@
             'success'
           );
 
-          window.endOrder = true;
-          StopUpdatingQuantities();
-          StartUpdatingOrderName();
+          endOrder = true;
+          if(updateNameOrder == 0)
+          {
+            StopUpdatingQuantities();
+            StartUpdatingOrderName();
+          }    
         }       
     }
     else
     {  
-      $('#progression').removeClass("bg-success")
-      window.endOrder = false;
+      $('#progression').removeClass("bg-success");
+      endOrder = false;
       //IsItStuck(data["bloque"]);
     }         
 
@@ -186,37 +213,14 @@
     $('#progression').attr('aria-valuenow', percent).css('width', percent + '%');
   }
 
-  function StopUpdatingQuantities()
-  {
-    clearInterval(window.updateQuantities);
-    window.updateQuantities = 0;
-  }
-
-  function StartUpdatingQuantities()
-  {
-    window.updateQuantities = setInterval(DrawQuantities, 1000)
-  }
-
-  function StartUpdatingOrderName()
-  {
-    window.updateNameOrder = setInterval(DrawBasicInfo, 1000)
-  }
-
-  function StopUpdatingOrderName()
-  {
-    clearInterval(window.updateNameOrder);
-    window.updateNameOrder = 0;
-  }
-
-
   function DrawMesure()
   {
     $.ajax({
       url:'ajaxHandler.php?event=GetMesure',
       success: function(output) {
         var data = JSON.parse(output);
-        $('#temperature').html(data[0]);
-        $('#humidite').html(data[2]);;
+        $('#temperature').html(data[2]);
+        $('#humidite').html(data[0]);
         $('#lastUpdateMesure').html('Dernière mise à jour: ' + data[3]);
       }
     })
@@ -226,21 +230,21 @@
   {
     if(_data === "1")
     {
-      if(window.bloque === false)
+      if(bloque === false)
       {
         Swal.fire(
           'Erreur',
           'Bouchon coincé',
           'error'
         );
-        window.bloque = true;
+        bloque = true;
         $('#progression').addClass("bg-danger");
         $('#mg_erreur').addClass("d-block");
-        $('#mg_erreur').html("Bouchon coincé!")
+        $('#mg_erreur').html("Bouchon coincé!");
       }
     }
     else{
-      window.bloque = false;
+      bloque = false;
       $('#progression').removeClass("bg-danger");
       $('#mg_erreur').removeClass("d-block");
     }
