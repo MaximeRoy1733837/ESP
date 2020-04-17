@@ -44,6 +44,7 @@ def insertEvent(dataEvent):
 def on_connect(client, userdata, flags, rc):
     # print("Connected with result code " + str(rc))
     print("Connecté sans erreur.")
+    client.subscribe("Mecanium/ESP/Epoch")
     client.subscribe("Mecanium/ESP/Temps")
     client.subscribe("Mecanium/ESP/Nom_commande")
     client.subscribe("Mecanium/ESP/Quantite_commande")
@@ -64,7 +65,7 @@ def on_message(client, userdata, msg):
 
     if msg.topic == "Mecanium/ESP/Quantite_commande" and commande != 1:
         commande = 1
-        dataCommande = (dataArray[1], dataArray[2])
+        dataCommande = (dataArray[2], dataArray[3])
         connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
         cursor = connection.cursor(buffered=True)
         cursor.execute(add_commande, dataCommande)
@@ -74,39 +75,38 @@ def on_message(client, userdata, msg):
         connection.close()
 
     if msg.topic == "Mecanium/ESP/Temperature":
-        #mgsDate = str(datetime.fromtimestamp(float(dataArray[0])))
-        data_info = (0, dataArray[0], dataArray[3], 1, 1, id_commande)
+        data_info = (dataArray[0], dataArray[1], dataArray[4], 1, 1, id_commande)
     elif msg.topic == "Mecanium/ESP/Humidite":
-        data_info = (0, dataArray[0], dataArray[4], 1, 2, id_commande)
+        data_info = (dataArray[0], dataArray[1], dataArray[5], 1, 2, id_commande)
     elif msg.topic == "Mecanium/ESP/Quantite_bon":
-        data_info = (0, dataArray[0], dataArray[5], 1, 3, id_commande)
+        data_info = (dataArray[0], dataArray[1], dataArray[6], 1, 3, id_commande)
     elif msg.topic == "Mecanium/ESP/Quantite_mauvais":
-        data_info = (0, dataArray[0], dataArray[6], 1, 4, id_commande)
+        data_info = (dataArray[0], dataArray[1], dataArray[7], 1, 4, id_commande)
     elif msg.topic == "Mecanium/ESP/Bloque":
 
-        if int(dataArray[7]) == 5:
-            dataEvent = (dataArray[0], 1, 1)
+        if int(dataArray[8]) == 5:
+            dataEvent = (dataArray[1], 1, 1)
             insertEvent(dataEvent)
-        elif int(dataArray[7]) == 10:
-            dataEvent = (dataArray[0], 1, 2)
+        elif int(dataArray[8]) == 10:
+            dataEvent = (dataArray[1], 1, 2)
             insertEvent(dataEvent)
-        elif int(dataArray[7]) == 15:
-            dataEvent = (dataArray[0], 1, 3)
+        elif int(dataArray[8]) == 15:
+            dataEvent = (dataArray[1], 1, 3)
             insertEvent(dataEvent)
 
         #insertEvent(dataEvent)
 
-        if int(dataArray[5]) >= int(dataArray[2]):
+        if int(dataArray[6]) >= int(dataArray[3]):
             cpt = 1
             while cpt <= 4:
                 if cpt == 1:
-                    dataHistory = (dataArray[0], dataArray[3], 1, cpt, id_commande)
+                    dataHistory = (dataArray[1], dataArray[4], 1, cpt, id_commande)
                 elif cpt == 2:
-                    dataHistory = (dataArray[0], dataArray[4], 1, cpt, id_commande)
+                    dataHistory = (dataArray[1], dataArray[5], 1, cpt, id_commande)
                 elif cpt == 3:
-                    dataHistory = (dataArray[0], dataArray[5], 1, cpt, id_commande)
+                    dataHistory = (dataArray[1], dataArray[6], 1, cpt, id_commande)
                 elif cpt == 4:
-                    dataHistory = (dataArray[0], dataArray[6], 1, cpt, id_commande)
+                    dataHistory = (dataArray[1], dataArray[7], 1, cpt, id_commande)
 
                 insertHistory(dataHistory)
                 commande = 0
