@@ -4,6 +4,9 @@ import paho.mqtt.publish as publish
 import random
 import sys
 
+print("Bienvenue dans la simulation du Siemens S7-1200")
+print(" ")
+
 
 def publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque):
     publish.single("Mecanium/ESP/Epoch", epoch, hostname="test.mosquitto.org")
@@ -15,13 +18,15 @@ def publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, q
     publish.single("Mecanium/ESP/Quantite_bon", quantiteBon, hostname="test.mosquitto.org")
     publish.single("Mecanium/ESP/Quantite_mauvais", quantiteMauvais, hostname="test.mosquitto.org")
     publish.single("Mecanium/ESP/Bloque", bloque, hostname="test.mosquitto.org")
-    print("Done")
+    #print("Done")
     time.sleep(6)
 
 
 def faireCommande():
     commande = input("Entrez le nom de la commande : ")
     quantite = input("Entrez la quantite de bouchon a produire : ")
+
+    print("La commande est en cour...")
 
     quantiteBon = 0
     quantiteMauvais = 0
@@ -40,9 +45,11 @@ def faireCommande():
                 quantiteBon = int(quantite)
 
             if bloque == 5 or bloque == 10 or bloque == 15:
-                arret = input("La machine c'est arrete, taper ok, puis enter pour continuer : ")
+                arret = input("La machine c'est arrete, taper 'ok' pour continuer ou 'non' pour quitter : ")
                 if arret == "ok":
                     publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque)
+                else:
+                    sys.exit()
             else:
                 publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque)
 
