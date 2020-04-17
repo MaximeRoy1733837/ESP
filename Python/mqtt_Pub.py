@@ -36,6 +36,9 @@ def faireCommande():
             bloque = random.randint(0, 20)
             epoch = datetime.datetime.now().timestamp()
 
+            if quantiteBon > int(quantite):
+                quantiteBon = int(quantite)
+
             if bloque == 5 or bloque == 10 or bloque == 15:
                 arret = input("La machine c'est arrete, taper ok, puis enter pour continuer : ")
                 if arret == "ok":
@@ -43,7 +46,7 @@ def faireCommande():
             else:
                 publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque)
 
-            if quantiteBon >= int(quantite):
+            if quantiteBon == int(quantite):
                 print("Terminer")
                 encore = input("Voulez-vous faire une autre commande? (oui ou non): ")
                 if encore == "oui":
