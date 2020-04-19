@@ -45,7 +45,7 @@
         $resultat = $class->getOrderBasicInfo();
         $resultatFetch = $resultat->fetch();
 
-        echo json_encode(array("nom_commande" => $resultatFetch["nom_commande"], "quantite_produire" => $resultatFetch["quantite_a_produire"]));
+        echo json_encode(array("nom_commande" => $resultatFetch["nom_commande"], "quantite_a_produire" => $resultatFetch["quantite_a_produire"]));
     }
 
     function GetQuantities()
