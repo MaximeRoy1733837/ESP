@@ -120,12 +120,13 @@
 
   function DrawOrderInfo()
   {
-    StartUpdatingQuantities();
+    
     DrawBasicInfo();
-    //DrawQuantities();
+    DrawQuantities();
     DrawMesure();
 
-    
+    StartUpdatingQuantities();
+    StartUpdatingOrderName();
     updateMesure = setInterval(DrawMesure, 3000);
   }
 
@@ -138,22 +139,22 @@
         $('#nom_commande').html(data["nom_commande"]);
         $('#quantite_produire').html(data["quantite_a_produire"]);
 
-        if(endOrder === false)
-        {
-          orderName = data["nom_commande"];
-        }
-        else
-        {
-          if(orderName !== data["nom_commande"])
-          {
-            if(updateQuantities == 0)
-            {
-              StopUpdatingOrderName();
-              StartUpdatingQuantities();
-            }
+        // if(endOrder === false)
+        // {
+        //   orderName = data["nom_commande"];
+        // }
+        // else
+        // {
+        //   if(orderName !== data["nom_commande"])
+        //   {
+        //     if(updateQuantities == 0)
+        //     {
+        //       StopUpdatingOrderName();
+        //       StartUpdatingQuantities();
+        //     }
             
-          }
-        }
+        //   }
+        // }
         
       }
     })
@@ -195,11 +196,11 @@
           );
 
           endOrder = true;
-          if(updateNameOrder == 0)
-          {
-            StopUpdatingQuantities();
-            StartUpdatingOrderName();
-          }    
+          // if(updateNameOrder == 0)
+          // {
+          //   StopUpdatingQuantities();
+          //   StartUpdatingOrderName();
+          // }    
         }       
     }
     else

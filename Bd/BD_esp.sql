@@ -155,13 +155,13 @@ end|
 delimiter |
 create procedure getMesure()
 begin
-	select distinct(valeur_capteur), date
+	select distinct(valeur_capteur), date, nom_capteur
     from tbl_info inner join tbl_commande
     on tbl_info.id_commande = tbl_info.id_commande
     inner join tbl_capteur
     on tbl_info.id_capteur = tbl_capteur.id_capteur
     where (tbl_capteur.nom_capteur in ('temperature','humidite')) and (tbl_info.id_commande = (select max(id_commande) from tbl_commande))
-    group by tbl_info.id_info desc limit 2;
+    group by  tbl_info.id_info desc limit 2;
 end|
 
 delimiter |
