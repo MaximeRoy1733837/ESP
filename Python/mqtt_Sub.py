@@ -57,7 +57,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic + " " + str(msg.payload.decode("utf-8")))
+    #print(msg.topic + " " + str(msg.payload.decode("utf-8")))
 
     dataArray.append(str(msg.payload.decode("utf-8")))
 
