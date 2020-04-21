@@ -175,6 +175,17 @@ begin
     order by tbl_historique.id_commande desc, tbl_historique.id_capteur asc;
 end|
 
+delimiter |
+create procedure getVarationTemperatue()
+begin
+	select *
+    from tbl_info inner join tbl_commande
+    on tbl_info.id_commande = tbl_commande.id_commande
+    inner join tbl_capteur
+    on tbl_info.id_capteur = tbl_capteur.id_capteur
+    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur = 'temperature';
+end|
+
 -- drop database bd_esp
 -- drop procedure getLastInsertedInfo
 -- drop procedure VerificationLogin

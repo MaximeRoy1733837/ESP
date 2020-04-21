@@ -55,6 +55,18 @@
     </div>
 
     <br>
+    <div class="container">
+        <canvas  id="diagrammeTemperature"></canvas>
+    </div>
+    <br>
+
+    <br>
+    <div class="container">
+        <canvas  id="diagrammeHumidite"></canvas>
+    </div>
+    <br>
+
+    <br>
 
     <h4 class="alert alert-primary" role="alert">Quantité production</h4>
     <h5 class="lastUpdateDate" id="lastUpdateQuantities"></h5>
@@ -94,16 +106,10 @@
     <br>
     <br>
 
-    <div class="container">
-        <canvas  id="DiagrammeTest"></canvas>
-    </div>
-
-    <br>
-    <br>
-
 </div> 
 
 <script type="text/javascript" src="Assets/JS/gestion_accueil.js"></script>
+<script type="text/javascript" src="Assets/JS/gestion_diagramme.js"></script>
 
 <?php $contenu = ob_get_clean(); ?>
 
