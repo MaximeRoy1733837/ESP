@@ -3,6 +3,7 @@
   var orderName = "";
   var updateNameOrder = 0;
   var updateQuantities = 0;
+  var breakUpdate = false;
 
   
   // var Diagramme = document.getElementById('DiagrammeTest').getContext('2d');
@@ -98,36 +99,35 @@
 
   function StartUpdatingQuantities()
   {
-    updateQuantities = setInterval(DrawQuantities, 1000);
+    window.updateQuantities = setInterval(DrawQuantities, 1000);
   }
 
   function StopUpdatingOrderName()
   {
     clearInterval(updateNameOrder);
-    updateNameOrder = 0;
+    window.updateNameOrder = 0;
   }
 
   function StopUpdatingQuantities()
   {
     clearInterval(updateQuantities);
-    updateQuantities = 0;
+    window.updateQuantities = 0;
   }
 
   function StartUpdatingOrderName()
   {
-    updateNameOrder = setInterval(DrawBasicInfo, 1000);
+    window.updateNameOrder = setInterval(DrawBasicInfo, 1000);
   }
 
   function DrawOrderInfo()
   {
-    
-    DrawBasicInfo();
     DrawQuantities();
+    DrawBasicInfo();
     DrawMesure();
 
     StartUpdatingQuantities();
-    StartUpdatingOrderName();
-    updateMesure = setInterval(DrawMesure, 3000);
+    //StartUpdatingOrderName();
+    window.updateMesure = setInterval(DrawMesure, 3000);
   }
 
   function DrawBasicInfo()
@@ -139,23 +139,24 @@
         $('#nom_commande').html(data["nom_commande"]);
         $('#quantite_produire').html(data["quantite_a_produire"]);
 
-        // if(endOrder === false)
-        // {
-        //   orderName = data["nom_commande"];
-        // }
-        // else
-        // {
-        //   if(orderName !== data["nom_commande"])
-        //   {
-        //     if(updateQuantities == 0)
-        //     {
-        //       StopUpdatingOrderName();
-        //       StartUpdatingQuantities();
-        //     }
-            
-        //   }
-        // }
-        
+        if(window.breakUpdate == true)
+        {
+          window.orderName = data["nom_commande"];
+          window.breakUpdate = false;
+        }
+
+        if(window.endOrder === true)
+        {
+          if((window.orderName != data["nom_commande"]) && (window.orderName != ""))
+          {
+            window.orderName = data["nom_commande"];
+            if(window.updateQuantities == 0)
+            {
+              StopUpdatingOrderName();
+              StartUpdatingQuantities();
+            }   
+          }
+        }  
       }
     })
   }
@@ -187,26 +188,28 @@
       percent = 100;
       $('#progression').addClass("bg-success");   
 
-        if(endOrder === false)
+        if(window.endOrder === false)
         {
-          Swal.fire(
-            'Succès',
-            'Commande terminé',
-            'success'
-          );
+          // Swal.fire(
+          //   'Succès',
+          //   'Commande terminé',
+          //   'success'
+          // );
 
-          endOrder = true;
-          // if(updateNameOrder == 0)
-          // {
-          //   StopUpdatingQuantities();
-          //   StartUpdatingOrderName();
-          // }    
-        }       
+          window.endOrder = true;
+        }   
+        
+        if(window.breakUpdate == false)
+        {
+          StopUpdatingQuantities();
+          StartUpdatingOrderName();
+          window.breakUpdate = true;
+        }    
     }
     else
     {  
       $('#progression').removeClass("bg-success");
-      endOrder = false;
+      window.endOrder = false;
       //IsItStuck(data["bloque"]);
     }         
 
@@ -231,21 +234,21 @@
   {
     if(_data === "1")
     {
-      if(bloque === false)
+      if(window.bloque === false)
       {
         Swal.fire(
           'Erreur',
           'Bouchon coincé',
           'error'
         );
-        bloque = true;
+        window.bloque = true;
         $('#progression').addClass("bg-danger");
         $('#mg_erreur').addClass("d-block");
         $('#mg_erreur').html("Bouchon coincé!");
       }
     }
     else{
-      bloque = false;
+      window.bloque = false;
       $('#progression').removeClass("bg-danger");
       $('#mg_erreur').removeClass("d-block");
     }
