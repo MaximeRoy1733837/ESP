@@ -37,7 +37,7 @@
     DrawMesure();
 
     StartUpdatingQuantities();
-    window.updateMesure = setInterval(DrawMesure, 3000);
+    window.updateMesure = setInterval(DrawMesure, 6000);
   }
 
   function DrawBasicInfo()

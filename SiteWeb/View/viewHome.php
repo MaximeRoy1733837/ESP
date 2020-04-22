@@ -55,16 +55,15 @@
     </div>
 
     <br>
-    <div class="container">
-        <canvas  id="diagrammeTemperature"></canvas>
-    </div>
     <br>
 
-    <br>
     <div class="container">
-        <canvas  id="diagrammeHumidite"></canvas>
+        <canvas  id="diagrammeMesure" style="position: relative";></canvas>
     </div>
+
     <br>
+
+
 
     <br>
 

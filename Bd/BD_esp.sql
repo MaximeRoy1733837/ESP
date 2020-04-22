@@ -176,14 +176,15 @@ begin
 end|
 
 delimiter |
-create procedure getVarationTemperatue()
+create procedure getVariationMesure()
 begin
-	select *
+	select valeur_capteur, epoch, nom_capteur
     from tbl_info inner join tbl_commande
     on tbl_info.id_commande = tbl_commande.id_commande
     inner join tbl_capteur
     on tbl_info.id_capteur = tbl_capteur.id_capteur
-    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur = 'temperature';
+    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur in('temperature','humidite')
+    order by epoch asc;
 end|
 
 -- drop database bd_esp

@@ -71,10 +71,40 @@
 
         while($resultatFetch = $resultat->fetch())
         {
-           array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["date"]);
+            array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["date"]);
         }
 
         $resultat->closeCursor();
         echo json_encode($data);
+    }
+
+    function GetVariationMesure(){
+        $class = new ManagerAjax();
+        $resultat = $class->getVariationMesure();
+
+
+        $arrayTemperature = array();
+        $arrayHumidite = array();
+        $arrayDate = array();
+        $cpt = 0;
+
+        while($resultatFetch = $resultat->fetch())
+        {
+            switch($resultatFetch["nom_capteur"])
+            {
+                case 'temperature':
+                    array_push($arrayTemperature, $resultatFetch["valeur_capteur"]);
+                    break;
+                case 'humidite':
+                    array_push($arrayHumidite, $resultatFetch["valeur_capteur"]);
+                    array_push($arrayDate, $resultatFetch["epoch"]);
+                    break;
+                default:
+                    break;
+            }  
+        }
+
+        $resultat->closeCursor();
+        echo json_encode(array("temperature" => $arrayTemperature, "humidite" => $arrayHumidite, "date" => $arrayDate));
     }
 ?>
