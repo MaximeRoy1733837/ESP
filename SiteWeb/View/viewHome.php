@@ -107,8 +107,9 @@
 
 </div> 
 
-<script type="text/javascript" src="Assets/JS/gestion_accueil.js"></script>
+
 <script type="text/javascript" src="Assets/JS/gestion_diagramme.js"></script>
+<script type="text/javascript" src="Assets/JS/gestion_accueil.js"></script>
 
 <?php $contenu = ob_get_clean(); ?>
 

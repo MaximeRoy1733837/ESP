@@ -137,6 +137,8 @@
         $('#temperature').html(data[2]);
         $('#humidite').html(data[0]);
         $('#lastUpdateMesure').html('Dernière mise à jour: ' + data[3]);
+
+        UpdateMesureChart(data[2], data[0], data[3]);
       }
     })
   }

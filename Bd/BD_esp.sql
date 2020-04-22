@@ -187,6 +187,18 @@ begin
     order by epoch asc;
 end|
 
+delimiter |
+create procedure UpdateMesureChart()
+begin
+	select valeur_capteur, epoch, nom_capteur
+    from tbl_info inner join tbl_commande
+    on tbl_info.id_commande = tbl_commande.id_commande
+    inner join tbl_capteur
+    on tbl_info.id_capteur = tbl_capteur.id_capteur
+    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur in('temperature','humidite')
+    order by epoch asc;
+end|
+
 -- drop database bd_esp
 -- drop procedure getLastInsertedInfo
 -- drop procedure VerificationLogin
@@ -194,6 +206,7 @@ end|
 -- drop procedure getQuantities
 -- drop procedure getMesure
 -- drop procedure getHistorique
+-- drop procedure getVariationMesure
 
 -- select * FROM tbl_info
 -- select * FROM tbl_historique

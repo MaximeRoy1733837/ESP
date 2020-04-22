@@ -86,7 +86,9 @@
         $arrayTemperature = array();
         $arrayHumidite = array();
         $arrayDate = array();
+        $DateTime = new DateTime();
         $cpt = 0;
+        
 
         while($resultatFetch = $resultat->fetch())
         {
@@ -96,8 +98,9 @@
                     array_push($arrayTemperature, $resultatFetch["valeur_capteur"]);
                     break;
                 case 'humidite':
-                    array_push($arrayHumidite, $resultatFetch["valeur_capteur"]);
-                    array_push($arrayDate, $resultatFetch["epoch"]);
+                    $DateTime->setTimestamp(floatval($resultatFetch["epoch"]));
+                    array_push($arrayDate, $DateTime->format('H:i:s'));
+                    array_push($arrayHumidite, $resultatFetch["valeur_capteur"]);        
                     break;
                 default:
                     break;
