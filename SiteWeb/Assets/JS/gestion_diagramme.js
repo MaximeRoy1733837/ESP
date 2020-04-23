@@ -18,13 +18,17 @@ function InitialDraw()
 
 function UpdateMesureChart(newTemperature, newHumidite, newTime){
 
+  if(window.MesureChart.data.datasets[0].data.length >= 12)
+  {
+    window.MesureChart.data.datasets[0].data.shift();
+    window.MesureChart.data.datasets[1].data.shift();
+    window.MesureChart.data.labels.shift();
+  }
   
-  window.MesureChart.data.datasets[0].data.shift();
+  window.MesureChart.data.labels.push(newTime); 
   window.MesureChart.data.datasets[0].data.push(parseInt(newTemperature));
   window.MesureChart.data.datasets[1].data.push(parseInt(newHumidite));
-  window.MesureChart.data.labels.push(newTime); 
- 
-  //window.MesureChart.date.datasets[1].data.shift();
+  
   
   window.MesureChart.update();
 }

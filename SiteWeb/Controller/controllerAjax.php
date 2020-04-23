@@ -1,6 +1,6 @@
 <?php
     require('Model/managerAjax.php');
-
+    date_default_timezone_set("America/Toronto");
     function VerificationLogin($username, $mdp)
     {
         $class = new ManagerAjax();
@@ -68,10 +68,12 @@
         $class = new ManagerAjax();
         $resultat = $class->getOrderMesure();
         $data = array();
+        $DateTime = new DateTime();
 
         while($resultatFetch = $resultat->fetch())
         {
-            array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["date"]);
+            $DateTime->setTimestamp(floatval($resultatFetch["epoch"]));           
+            array_push($data, $resultatFetch["valeur_capteur"], $DateTime->format('H:i:s'));
         }
 
         $resultat->closeCursor();
@@ -81,7 +83,6 @@
     function GetVariationMesure(){
         $class = new ManagerAjax();
         $resultat = $class->getVariationMesure();
-
 
         $arrayTemperature = array();
         $arrayHumidite = array();
