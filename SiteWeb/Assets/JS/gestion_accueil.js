@@ -37,7 +37,7 @@
     DrawMesure();
 
     StartUpdatingQuantities();
-    window.updateMesure = setInterval(DrawMesure, 6000);
+    updateMesure = setInterval(DrawMesure, 6000);
   }
 
   function DrawBasicInfo()
@@ -121,6 +121,7 @@
     {  
       $('#progression').removeClass("bg-success");
       window.endOrder = false;
+      
       //IsItStuck(data["bloque"]);
     }         
 
@@ -136,7 +137,7 @@
         var data = JSON.parse(output);
         $('#temperature').html(data[2]);
         $('#humidite').html(data[0]);
-        $('#lastUpdateMesure').html('Dernière mise à jour: ' + data[3]);
+        //$('#lastUpdateMesure').html('Dernière mise à jour: ' + data[3]);
 
         if(document.readyState == "complete")
         {
