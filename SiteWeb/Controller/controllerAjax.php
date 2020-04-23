@@ -1,6 +1,8 @@
 <?php
     require('Model/managerAjax.php');
+    
     date_default_timezone_set("America/Toronto");
+
     function VerificationLogin($username, $mdp)
     {
         $class = new ManagerAjax();
