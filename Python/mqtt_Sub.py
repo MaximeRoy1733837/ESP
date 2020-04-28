@@ -37,8 +37,8 @@ def insertHistory(dataHistory):
 
 def insertEvent(dataEvent):
     add_event = (
-        "INSERT INTO `tbl_evenement` (`date_evenement`, `id_machine`, `id_type_evenement`)"
-        " VALUES (%s, %s, %s)")
+        "INSERT INTO `tbl_evenement` (`date_evenement`, `id_machine`, `id_type_evenement`,`notifier`)"
+        " VALUES (%s, %s, %s, %s)")
     insert(add_event, dataEvent)
 
 
@@ -86,13 +86,13 @@ def on_message(client, userdata, msg):
     elif msg.topic == "Mecanium/ESP/Bloque":
 
         if int(dataArray[8]) == 5:
-            dataEvent = (dataArray[1], 1, 1)
+            dataEvent = (dataArray[1], 1, 1, False)
             insertEvent(dataEvent)
         elif int(dataArray[8]) == 10:
-            dataEvent = (dataArray[1], 1, 2)
+            dataEvent = (dataArray[1], 1, 2, False)
             insertEvent(dataEvent)
         elif int(dataArray[8]) == 15:
-            dataEvent = (dataArray[1], 1, 3)
+            dataEvent = (dataArray[1], 1, 3, False)
             insertEvent(dataEvent)
 
         #insertEvent(dataEvent)

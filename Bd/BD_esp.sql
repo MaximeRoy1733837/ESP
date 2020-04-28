@@ -41,6 +41,7 @@ CREATE TABLE `tbl_evenement` (
   `date_evenement` varchar(35) DEFAULT NULL,
   `id_machine` int(11) NOT NULL,
   `id_type_evenement` int(11) NOT NULL,
+  `notifier` boolean DEFAULT FALSE,
   PRIMARY KEY (`id_evenement`))ENGINE=InnoDB;
   
 CREATE TABLE `tbl_type_evenement` (
@@ -106,9 +107,9 @@ INSERT INTO `tbl_type_evenement` (`nom_evenement`)
 				('machine_bloque'),
                 ('machine_arrete');
                 
-INSERT INTO `tbl_evenement` (`date_evenement`,`id_machine`,`id_type_evenement`)
-		VALUES 	('Lundi 6 avril 13:52',1,1),
-				('Lundi 6 avril 13:55',1,2);
+INSERT INTO `tbl_evenement` (`date_evenement`,`id_machine`,`id_type_evenement`,`notifier`)
+		VALUES 	('Lundi 6 avril 13:52',1,1,false),
+				('Lundi 6 avril 13:55',1,2,false);
                 
 INSERT INTO `tbl_utilisateur` (`id_utilisateur`, `nom`, `prenom`, `nom_utilisateur`, `motPasse`) 
 		VALUES 	(1,'Roy','Maxime','mroy','*FB488315048F29BF9A666F7B7102E6DE1D3363B8'),
