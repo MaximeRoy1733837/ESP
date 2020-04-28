@@ -122,7 +122,7 @@
       $('#progression').removeClass("bg-success");
       window.endOrder = false;
       
-      //IsItStuck(data["bloque"]);
+      //CheckForEvent(data["bloque"]);
     }         
 
     $('#progression').html(percent + '%');
@@ -139,7 +139,7 @@
         $('#humidite').html(data[0]);
         //$('#lastUpdateMesure').html('Dernière mise à jour: ' + data[3]);
 
-        if(document.readyState == "complete")
+        if(document.readyState == "complete" && endOrder === false)
         {
           UpdateMesureChart(data[2], data[0], data[3]);
         }
@@ -147,26 +147,52 @@
     })
   }
 
-  function IsItStuck(_data)
-  {
-    if(_data === "1")
-    {
-      if(window.bloque === false)
+  function ShowEvent(eventMessage){
+    if(window.bloque === false)
       {
         Swal.fire(
-          'Erreur',
-          'Bouchon coincé',
+          'Machine Arrêté',
+          eventMessage,
           'error'
         );
         window.bloque = true;
         $('#progression').addClass("bg-danger");
         $('#mg_erreur').addClass("d-block");
-        $('#mg_erreur').html("Bouchon coincé!");
+        $('#mg_erreur').html(eventMessage);
       }
-    }
-    else{
-      window.bloque = false;
-      $('#progression').removeClass("bg-danger");
-      $('#mg_erreur').removeClass("d-block");
-    }
+  }
+
+  function CheckForEvent(_data)
+  {
+    $.ajax({
+      url:'ajaxHandler.php?event=GetLatestEvent',
+      success: function(output) {
+        var data = JSON.parse(output);
+
+        if(data == false)
+        {
+          var eventMessage = ""; 
+
+          switch(data["nom_evenement"]){
+            case "manque_bouchon":
+              eventMessage = "Récipent à bouchons vide";
+              break;
+            case "machine_bloque":
+              eventMessage = "Convoyeur bloqué";
+              break;
+            default:
+              eventMessage = "La machine à explosé";
+              break;
+          }
+
+
+          ShowEvent(eventMessage);
+        }
+        else{
+          window.bloque = false;
+          $('#progression').removeClass("bg-danger");
+          $('#mg_erreur').removeClass("d-block");
+        }    
+      }
+    })
   }
