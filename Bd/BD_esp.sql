@@ -156,7 +156,7 @@ end|
 delimiter |
 create procedure getMesure()
 begin
-	select distinct(valeur_capteur), date, nom_capteur
+	select distinct(valeur_capteur), epoch, nom_capteur
     from tbl_info inner join tbl_commande
     on tbl_info.id_commande = tbl_info.id_commande
     inner join tbl_capteur
@@ -177,14 +177,42 @@ begin
 end|
 
 delimiter |
-create procedure getVarationTemperatue()
+create procedure getVariationMesure()
 begin
-	select *
+	select x.*
+    from (select valeur_capteur, epoch, nom_capteur
     from tbl_info inner join tbl_commande
     on tbl_info.id_commande = tbl_commande.id_commande
     inner join tbl_capteur
     on tbl_info.id_capteur = tbl_capteur.id_capteur
-    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur = 'temperature';
+    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur in('temperature','humidite')
+    order by epoch desc limit 24) as x
+    order by x.epoch asc;
+end|
+
+
+delimiter |
+create procedure getRowMesure(in _RowWantedMinusOne int)
+begin
+	select valeur_capteur, epoch, nom_capteur
+    from tbl_info inner join tbl_commande
+    on tbl_info.id_commande = tbl_commande.id_commande
+    inner join tbl_capteur
+    on tbl_info.id_capteur = tbl_capteur.id_capteur
+    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur in('temperature','humidite')
+    order by epoch asc, tbl_capteur.id_capteur
+    limit _RowWantedMinusOne,1;
+end|
+
+delimiter |
+create procedure getNumberRowMesure(in _RowWantedMinusOne int)
+begin
+	select count(distinct(epoch)) as RowCount
+    from tbl_info inner join tbl_commande
+    on tbl_info.id_commande = tbl_commande.id_commande
+    inner join tbl_capteur
+    on tbl_info.id_capteur = tbl_capteur.id_capteur
+    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur in('temperature','humidite');
 end|
 
 -- drop database bd_esp
@@ -194,6 +222,8 @@ end|
 -- drop procedure getQuantities
 -- drop procedure getMesure
 -- drop procedure getHistorique
+-- drop procedure getVariationMesure
+-- drop procedure UpdateMesureChart
 
 -- select * FROM tbl_info
 -- select * FROM tbl_historique

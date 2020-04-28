@@ -1,5 +1,7 @@
 <?php
     require('Model/managerAjax.php');
+    
+    date_default_timezone_set("America/Toronto");
 
     function VerificationLogin($username, $mdp)
     {
@@ -68,13 +70,47 @@
         $class = new ManagerAjax();
         $resultat = $class->getOrderMesure();
         $data = array();
+        $DateTime = new DateTime();
 
         while($resultatFetch = $resultat->fetch())
         {
-           array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["date"]);
+            $DateTime->setTimestamp(floatval($resultatFetch["epoch"]));           
+            array_push($data, $resultatFetch["valeur_capteur"], $DateTime->format('H:i:s'));
         }
 
         $resultat->closeCursor();
         echo json_encode($data);
+    }
+
+    function GetVariationMesure(){
+        $class = new ManagerAjax();
+        $resultat = $class->getVariationMesure();
+
+        $arrayTemperature = array();
+        $arrayHumidite = array();
+        $arrayDate = array();
+        $DateTime = new DateTime();
+        $cpt = 0;
+        
+
+        while($resultatFetch = $resultat->fetch())
+        {
+            switch($resultatFetch["nom_capteur"])
+            {
+                case 'temperature':
+                    array_push($arrayTemperature, $resultatFetch["valeur_capteur"]);
+                    break;
+                case 'humidite':
+                    $DateTime->setTimestamp(floatval($resultatFetch["epoch"]));
+                    array_push($arrayDate, $DateTime->format('H:i:s'));
+                    array_push($arrayHumidite, $resultatFetch["valeur_capteur"]);        
+                    break;
+                default:
+                    break;
+            }  
+        }
+
+        $resultat->closeCursor();
+        echo json_encode(array("temperature" => $arrayTemperature, "humidite" => $arrayHumidite, "date" => $arrayDate));
     }
 ?>

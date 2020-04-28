@@ -44,6 +44,14 @@
             $resultat->execute();
             return $resultat;
         }
+
+        public function getVariationMesure()
+        {
+            $sql = 'call GetVariationMesure';
+            $resultat = self::getConnexion()->prepare($sql);
+            $resultat->execute();
+            return $resultat;
+        }
     }
 
 ?>

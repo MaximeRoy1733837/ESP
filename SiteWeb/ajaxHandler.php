@@ -23,6 +23,9 @@
 			case 'GetMesure':
 				GetMesure();
 				break;
+			case 'GetVariationMesure':
+				GetVariationMesure();
+				break;
 			case 'ValidateLogin':
 				if(isset($_POST['nom_utilisateur']) && isset($_POST['mdp']))
 				{

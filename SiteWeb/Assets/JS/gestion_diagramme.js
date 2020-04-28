@@ -1,89 +1,86 @@
   
-  var diagrammeTemperature = document.getElementById('diagrammeTemperature').getContext('2d');
-  var diagrammeHumidite = document.getElementById('diagrammeHumidite').getContext('2d');
+var MesureChartContext = document.getElementById('diagrammeMesure').getContext('2d');
+var MesureChart;
 
-$(document).ready(PopDiagramme());
+$(document).ready(InitialDraw());
 
-function PopDiagramme()
+function InitialDraw()
 {
-    PopTemperature();
-    PopHumidite();
+  $.ajax({
+    url:'ajaxHandler.php?event=GetVariationMesure',
+    success: function(output) {
+      var data = JSON.parse(output);
+
+      PopMesureChart(data["temperature"], data["humidite"], data["date"]);
+    }
+  })
 }
 
-function PopTemperature(){
-    var PopDiagrammeTemperature = new Chart(diagrammeTemperature, {
-        type:'line',
-        data:{
-            labels:['2 avil 2020 17h02:51', '3 avril 2020 11h14:14', '4 Avril 2020 12h45:16'],          // nom des valeurs en axis X
-            datasets:[{
-              label:'Temperature',
-              data:[                              // nombre sur axe Y
-                50,
-                64,
-                2
-              ]
-            }]
-            
-        },
-        options:{
-          responsive: true,
-          scales: {
-            xAxes: [ {
-              //type: 'time',
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Temps'
-              }
-            }],
-            yAxes: [ {
-              //type: 'number',
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Temperature'
-              }
-            }]
-          }
-        }
-    });
+function UpdateMesureChart(newTemperature, newHumidite, newTime){
+
+  if(window.MesureChart.data.datasets[0].data.length >= 12)
+  {
+    window.MesureChart.data.datasets[0].data.shift();
+    window.MesureChart.data.datasets[1].data.shift();
+    window.MesureChart.data.labels.shift();
+  }
+  
+  window.MesureChart.data.labels.push(newTime); 
+  window.MesureChart.data.datasets[0].data.push(parseInt(newTemperature));
+  window.MesureChart.data.datasets[1].data.push(parseInt(newHumidite));
+  
+  
+  window.MesureChart.update();
 }
 
-function PopHumidite(){
-    var PopDiagrammeHumidite = new Chart(diagrammeHumidite, {
-        type:'line',
-        data:{
-            labels:['2 avil 2020 17h02:51', '3 avril 2020 11h14:14', '4 Avril 2020 12h45:16'],          // nom des valeurs en axis X
-            datasets:[{
-              label:'Humidite',
-              data:[                              // nombre sur axe Y
-                50,
-                64,
-                2
-              ]
-            }]
-            
-        },
-        options:{
-          responsive: true,
-          scales: {
-            xAxes: [ {
-              //type: 'time',
+function GetNewMesureChartData(){
+  $.ajax({
+    url:'ajaxHandler.php?event=GetVariationMesure',
+    success: function(output) {
+      var data = JSON.parse(output);
+
+    }
+  })
+}
+
+function PopMesureChart(arrayDataTemperature, arrayDataHumidite, labelTime){
+
+  window.MesureChart = new Chart(MesureChartContext, {
+      type:'line',
+      data:{
+          labels: labelTime,          // nom des valeurs en axis X
+          datasets:[{
+            label:'Temperature',
+            borderColor: 'rgb(17, 173, 59)',
+            data: arrayDataTemperature,
+          },
+          {
+            label:'humidite',
+            borderColor: 'rgb(22, 43, 181)',
+            data: arrayDataHumidite,
+          }]
+          
+      },
+      options:{
+        responsive: true,
+        scales: {
+          xAxes: [ {
+            //type: 'time',
+            display: true,
+            scaleLabel: {
               display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Date'
-              }
-            }],
-            yAxes: [ {
-              //type: 'number',
+              labelString: 'Temps'
+            }
+          }],
+          yAxes: [ {
+            //type: 'number',
+            display: true,
+            scaleLabel: {
               display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Pourcentage (%)'
-              }
-            }]
-          }
+              labelString: '(°C) / (%) '
+            }
+          }]
         }
-    });
+      }
+  });
 }
