@@ -82,6 +82,26 @@
         echo json_encode($data);
     }
 
+    function GetLatestEvent()
+    {
+        $class = new ManagerAjax();
+        $resultat = $class->getLatestEvent();
+
+        $resultatFetch = $resultat->fetch();
+
+        echo json_encode(array("nom_evenement" => $resultatFetch["nom_evenement"],  "notifier" => (bool)$resultatFetch["notifier"]));
+    }
+
+    function SetNotifierToTrue()
+    {
+        $class = new ManagerAjax();
+        $resultat = $class->setNotifierToTrue();
+
+        $resultatFetch = $resultat->fetch();
+
+        echo $resultatFetch;
+    }
+
     function GetVariationMesure(){
         $class = new ManagerAjax();
         $resultat = $class->getVariationMesure();
