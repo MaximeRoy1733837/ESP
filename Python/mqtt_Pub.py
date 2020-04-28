@@ -44,15 +44,14 @@ def faireCommande():
             if quantiteBon > int(quantite):
                 quantiteBon = int(quantite)
 
+            publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque)
+
             if bloque == 5 or bloque == 10 or bloque == 15:
                 arret = input("La machine c'est arrete, taper 'ok' pour continuer ou 'non' pour quitter : ")
                 if arret == "ok":
                     print("La commande est en cour...")
-                    publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque)
                 else:
                     sys.exit()
-            else:
-                publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque)
 
             if quantiteBon == int(quantite):
                 print("Terminer")
