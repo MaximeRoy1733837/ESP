@@ -1,5 +1,5 @@
   var endOrder = false;
-  var bloque = false;
+  var quantitiesWhenEvent = -1;
   var orderName = "";
   var updateNameOrder = 0;
   var updateQuantities = 0;
@@ -82,10 +82,17 @@
         $('#quantite_bad').html(data[0]);
         $('#lastUpdateQuantities').html('Dernière mise à jour: ' + data[5]);
 
+
+        if(window.quantiteLorsDeArret != -1 && window.quantiteLorsDeArret != parseInt(data[3]))
+        {
+          ChangeEventStateToTrue();
+        }
+
         if (parseInt(data[1]) > 0)
         {
           UpdateProgressBar(parseInt(data[3]),parseInt(data[1]));
         }
+
       }
     })
   }
@@ -122,7 +129,7 @@
       $('#progression').removeClass("bg-success");
       window.endOrder = false;
       
-      //CheckForEvent(data["bloque"]);
+      CheckForEvent(_quantiteBon);
     }         
 
     $('#progression').html(percent + '%');
@@ -147,19 +154,33 @@
     })
   }
 
-  function ShowEvent(eventMessage){
-    if(window.bloque === false)
+  function ShowEvent(eventMessage, quantiteLorsDeArret)
+  {
+    if(window.quantitiesWhenEvent === -1)
       {
         Swal.fire(
           'Machine Arrêté',
           eventMessage,
           'error'
         );
-        window.bloque = true;
+        window.quantitiesWhenEvent = quantiteLorsDeArret;
         $('#progression').addClass("bg-danger");
         $('#mg_erreur').addClass("d-block");
         $('#mg_erreur').html(eventMessage);
       }
+  }
+
+  function ChangeEventStateToTrue()
+  {
+    $.ajax({
+      url:'ajaxHandler.php?event=SetNotifierToTrue',
+      success: function() { 
+        
+        window.quantitiesWhenEvent = -1;
+        $('#progression').removeClass("bg-danger");
+        $('#mg_erreur').removeClass("d-block");
+      }
+    })
   }
 
   function CheckForEvent(_data)
@@ -169,7 +190,7 @@
       success: function(output) {
         var data = JSON.parse(output);
 
-        if(data == false)
+        if(data["notifier"] === false)
         {
           var eventMessage = ""; 
 
@@ -185,13 +206,7 @@
               break;
           }
 
-
-          ShowEvent(eventMessage);
-        }
-        else{
-          window.bloque = false;
-          $('#progression').removeClass("bg-danger");
-          $('#mg_erreur').removeClass("d-block");
+          ShowEvent(eventMessage, _data);
         }    
       }
     })

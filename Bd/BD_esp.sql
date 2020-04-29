@@ -190,6 +190,22 @@ begin
     order by x.epoch asc;
 end|
 
+delimiter |
+create procedure getLatestEvent()
+begin
+	select nom_evenement, notifier
+    from tbl_evenement inner join tbl_type_evenement
+    on tbl_evenement.id_type_evenement = tbl_type_evenement.id_type_evenement
+    where id_evenement = (select max(id_evenement) from tbl_evenement);
+end|
+
+delimiter |
+create procedure setNotifierToTrueInEvent()
+begin
+	update tbl_evenement
+	set notifier = true
+	where id_evenement = (select max(id_evenement) from tbl_evenement); 
+end|
 
 delimiter |
 create procedure getRowMesure(in _RowWantedMinusOne int)
@@ -224,6 +240,7 @@ end|
 -- drop procedure getHistorique
 -- drop procedure getVariationMesure
 -- drop procedure UpdateMesureChart
+-- drop procedure getLatestEvent
 
 -- select * FROM tbl_info
 -- select * FROM tbl_historique

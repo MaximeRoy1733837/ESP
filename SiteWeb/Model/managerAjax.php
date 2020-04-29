@@ -52,6 +52,22 @@
             $resultat->execute();
             return $resultat;
         }
+
+        public function getLatestEvent()
+        {
+            $sql = 'call getLatestEvent';
+            $resultat = self::getConnexion()->prepare($sql);
+            $resultat->execute();
+            return $resultat;
+        }
+
+        public function setNotifierToTrue()
+        {
+            $sql = 'call setNotifierToTrueInEvent';
+            $resultat = self::getConnexion()->prepare($sql);
+            $resultat->execute();
+            return $resultat;
+        }
     }
 
 ?>

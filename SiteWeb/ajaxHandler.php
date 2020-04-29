@@ -26,6 +26,12 @@
 			case 'GetVariationMesure':
 				GetVariationMesure();
 				break;
+			case 'GetLatestEvent':
+				GetLatestEvent();
+				break;
+			case 'SetNotifierToTrue':
+				SetNotifierToTrue();
+				break;
 			case 'ValidateLogin':
 				if(isset($_POST['nom_utilisateur']) && isset($_POST['mdp']))
 				{
