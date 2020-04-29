@@ -12,8 +12,8 @@
 	<script type="text/javascript" src="Plugin/jquery-validate-1.19.1/dist/localization/messages_fr.js"></script>
     <script type="text/javascript" src="Plugin/Chart.bundle.min.js"></script>
 
-	<link rel="stylesheet" href="Plugin/bootstrap-4.4.1/css/bootstrap.min.css">
-    <script type="text/javascript" src="Plugin/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="Plugin/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="Plugin/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="Plugin/sweetalert2/sweetalert2.all.min.js"></script>
 
     <link rel="stylesheet" href="Assets/CSS/style.css">

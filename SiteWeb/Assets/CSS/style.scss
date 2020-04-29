@@ -1,0 +1,69 @@
+
+$card-spacer-y : 1.5rem;
+
+@import "../../Plugin/node_modules/bootstrap/scss/bootstrap";
+
+$orderInfoFontSize : xx-large;
+$generalFontSize : large;
+$warningColor : #dc3545;
+$successColor : rgb(86, 143, 0);
+
+p{
+    font: 24px "Fira Sans", sans-serif;
+}
+
+h1{
+    font: 50px "Fira Sans", sans-serif;
+}
+
+em.is-invalid {
+    color: $warningColor;
+    font-size: 16px;
+    font-style: normal;
+}
+
+.floatRight{
+    float: right;
+}
+
+.infoCard{
+    font-size: $orderInfoFontSize;
+}
+
+.rejectQuantities{
+    font-size: $orderInfoFontSize;
+    color: $warningColor; 
+}
+
+.acceptQuantities{
+    font-size: $orderInfoFontSize;
+    color: $successColor; 
+}
+
+.lastUpdateDate{
+    color: rgb(0, 99, 248);
+}
+
+.contentpacing{
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.cardH5{
+    color: rgb(0, 0, 0);
+    text-align: left;
+}
+
+.card-title{
+    font-size: $generalFontSize;
+}
+
+.card-text{
+    font-size: $orderInfoFontSize;
+}
+
+.cardInfo{
+    display: inline;
+    font-size: $generalFontSize;
+}

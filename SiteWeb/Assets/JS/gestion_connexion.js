@@ -8,7 +8,7 @@ $("#frm_connexion").validate({
 		},
 		txt_mdp: {
             required: true,
-            minlength: 3
+            minlength: 6
 		}
 	},
 	messages: {
@@ -17,7 +17,7 @@ $("#frm_connexion").validate({
  		},
         txt_mdp: {
 		    required: 'Le mot de passe est obligatoire',
-            minlength: 'Le mot de passe doit être plus de 3 caractères'
+            minlength: 'Le mot de passe doit être plus de 5 caractères'
 		}
 	},
     submitHandler: function () {

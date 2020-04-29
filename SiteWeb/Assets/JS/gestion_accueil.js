@@ -83,7 +83,7 @@
         $('#lastUpdateQuantities').html('Dernière mise à jour: ' + data[5]);
 
 
-        if(window.quantiteLorsDeArret != -1 && window.quantiteLorsDeArret != parseInt(data[3]))
+        if(window.quantitiesWhenEvent != -1 && window.quantitiesWhenEvent != parseInt(data[3]))
         {
           ChangeEventStateToTrue();
         }
@@ -154,35 +154,6 @@
     })
   }
 
-  function ShowEvent(eventMessage, quantiteLorsDeArret)
-  {
-    if(window.quantitiesWhenEvent === -1)
-      {
-        Swal.fire(
-          'Machine Arrêté',
-          eventMessage,
-          'error'
-        );
-        window.quantitiesWhenEvent = quantiteLorsDeArret;
-        $('#progression').addClass("bg-danger");
-        $('#mg_erreur').addClass("d-block");
-        $('#mg_erreur').html(eventMessage);
-      }
-  }
-
-  function ChangeEventStateToTrue()
-  {
-    $.ajax({
-      url:'ajaxHandler.php?event=SetNotifierToTrue',
-      success: function() { 
-        
-        window.quantitiesWhenEvent = -1;
-        $('#progression').removeClass("bg-danger");
-        $('#mg_erreur').removeClass("d-block");
-      }
-    })
-  }
-
   function CheckForEvent(_data)
   {
     $.ajax({
@@ -208,6 +179,35 @@
 
           ShowEvent(eventMessage, _data);
         }    
+      }
+    })
+  }
+
+  function ShowEvent(eventMessage, quantiteLorsDeArret)
+  {
+    if(window.quantitiesWhenEvent === -1)
+      {
+        Swal.fire(
+          'Machine Arrêté',
+          eventMessage,
+          'error'
+        );
+        window.quantitiesWhenEvent = quantiteLorsDeArret;
+        $('#progression').addClass("bg-danger");
+        $('#mg_erreur').addClass("d-block");
+        $('#mg_erreur').html(eventMessage);
+      }
+  }
+
+  function ChangeEventStateToTrue()
+  {
+    $.ajax({
+      url:'ajaxHandler.php?event=SetNotifierToTrue',
+      success: function() { 
+        
+        window.quantitiesWhenEvent = -1;
+        $('#progression').removeClass("bg-danger");
+        $('#mg_erreur').removeClass("d-block");
       }
     })
   }
