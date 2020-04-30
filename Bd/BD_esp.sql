@@ -108,8 +108,8 @@ INSERT INTO `tbl_type_evenement` (`nom_evenement`)
                 ('machine_arrete');
                 
 INSERT INTO `tbl_evenement` (`date_evenement`,`id_machine`,`id_type_evenement`,`notifier`)
-		VALUES 	('Lundi 6 avril 13:52',1,1,false),
-				('Lundi 6 avril 13:55',1,2,false);
+		VALUES 	('Lundi 6 avril 13:52',1,1,true),
+				('Lundi 6 avril 13:55',1,2,true);
                 
 INSERT INTO `tbl_utilisateur` (`id_utilisateur`, `nom`, `prenom`, `nom_utilisateur`, `motPasse`) 
 		VALUES 	(1,'Roy','Maxime','mroy','*FB488315048F29BF9A666F7B7102E6DE1D3363B8'),
@@ -143,7 +143,7 @@ end|
 delimiter |
 create procedure getQuantities()
 begin
-	select distinct(valeur_capteur), quantite_a_produire, date
+	select distinct(valeur_capteur), quantite_a_produire, epoch
     from tbl_info inner join tbl_commande
     on tbl_info.id_commande = tbl_info.id_commande
     inner join tbl_capteur

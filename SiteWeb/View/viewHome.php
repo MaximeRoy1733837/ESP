@@ -13,13 +13,6 @@
         </div>
     </div>
 
-    <!-- <div class="card bg-light">
-        <div class="card-body">
-            <h5 class="card-title">Date début production :</h5>
-            <p id="date_debut" class="card-text text-center infoCard">4 avril 2020 12:45</p>
-        </div>
-    </div> -->
-
     <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Quantité à produire :</h5>
@@ -30,7 +23,6 @@
     <br>
 
     <h4 class="alert alert-primary" role="alert">Mesure</h4>
-    <!-- <h5 class="lastUpdateDate" id="lastUpdateMesure"></h5> -->
 
     <div class="row">
 

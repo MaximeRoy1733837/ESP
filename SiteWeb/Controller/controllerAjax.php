@@ -55,10 +55,12 @@
         $class = new ManagerAjax();
         $resultat = $class->getOrderQuantities();
         $data = array();
+        $DateTime = new DateTime();
 
         while($resultatFetch = $resultat->fetch())
         {
-           array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["quantite_a_produire"], $resultatFetch["date"] );
+            $DateTime->setTimestamp(floatval($resultatFetch["epoch"])); 
+            array_push($data, $resultatFetch["valeur_capteur"], $resultatFetch["quantite_a_produire"],  $DateTime->format("Y-m-d H:i:s"));
         }
 
         $resultat->closeCursor();

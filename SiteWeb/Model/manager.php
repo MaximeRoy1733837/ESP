@@ -15,13 +15,6 @@
             $resultat->execute();
             return $resultat;       
         }
-
-        public function getUser() { 
-            $sql = 'SELECT no_utilisateur, nom, prenom, nom_utilisateur, motPasse FROM tbl_utilisateur';
-            $resultat = self::getConnexion()->query($sql);
-            return $resultat;        
-        }
-
     }
 
 ?>

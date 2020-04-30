@@ -10,7 +10,7 @@ print(" ")
 
 def publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque):
     publish.single("Mecanium/ESP/Epoch", epoch, hostname="test.mosquitto.org")
-    publish.single("Mecanium/ESP/Temps", str(datetime.datetime.now()), hostname="test.mosquitto.org")
+    publish.single("Mecanium/ESP/Temps", datetime.datetime.now().strftime("%x %X"), hostname="test.mosquitto.org")
     publish.single("Mecanium/ESP/Nom_commande", commande, hostname="test.mosquitto.org")
     publish.single("Mecanium/ESP/Quantite_commande", quantite, hostname="test.mosquitto.org")
     publish.single("Mecanium/ESP/Temperature", temperature, hostname="test.mosquitto.org")

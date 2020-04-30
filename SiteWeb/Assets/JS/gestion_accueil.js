@@ -144,7 +144,6 @@
         var data = JSON.parse(output);
         $('#temperature').html(data[2]);
         $('#humidite').html(data[0]);
-        //$('#lastUpdateMesure').html('Dernière mise à jour: ' + data[3]);
 
         if(document.readyState == "complete" && endOrder === false)
         {
