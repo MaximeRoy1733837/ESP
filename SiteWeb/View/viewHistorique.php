@@ -20,8 +20,8 @@
                 <div class="card-header" id="heading<?php echo $cpt ?>">
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $cpt ?>" aria-expanded="false" aria-controls="collapse<?php echo $cpt ?>">
-                            <h5 class="cardH5"><p class="cardInfo"> Commande: <?php echo $enregistrement['nom_commande'] ?></p> </br>
-                            <p class="cardInfo"> Date : <?php  echo $enregistrement['date_historique']; ?></p> </h5>
+                            <p class=""> Commande: <?php echo $enregistrement['nom_commande'] ?></p>
+                            <p class=""> Date : <?php  echo $enregistrement['date_historique']; ?></p>
                         </button>
                     </h2>
                 </div>

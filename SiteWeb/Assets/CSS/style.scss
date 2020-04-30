@@ -1,5 +1,7 @@
 
-$card-spacer-y : 1.5rem;
+//$card-spacer-y : 1.5rem;
+//$border-radius: 0rem;
+//$card-spacer-x : 3rem;
 
 @import "../../Plugin/node_modules/bootstrap/scss/bootstrap";
 
@@ -8,8 +10,39 @@ $generalFontSize : large;
 $warningColor : #dc3545;
 $successColor : rgb(86, 143, 0);
 
-p{
-    font: 24px "Fira Sans", sans-serif;
+
+.card{
+    .card-header{
+        p{
+            font: 20px "Fira Sans", sans-serif;
+            color: rgb(0, 0, 0);
+            text-align: left;
+        }
+    }
+    .card-body{
+        p{
+            font: 18px "Fira Sans", sans-serif;
+            text-align: center;
+        }
+
+        h5{
+           font-size: $generalFontSize;
+        }
+
+        h6{
+           font-size: $orderInfoFontSize;
+        }
+
+        .rejectQuantities{
+            color: $warningColor; 
+            font-size: $orderInfoFontSize;
+        }
+        
+        .acceptQuantities{
+            color: $successColor; 
+            font-size: $orderInfoFontSize;
+        }
+    }
 }
 
 h1{
@@ -50,20 +83,20 @@ em.is-invalid {
     margin-right: 10px;
 }
 
-.cardH5{
-    color: rgb(0, 0, 0);
-    text-align: left;
-}
+// .cardH5{
+//     color: rgb(0, 0, 0);
+//     text-align: left;
+// }
 
-.card-title{
-    font-size: $generalFontSize;
-}
+// .card-title{
+//     font-size: $generalFontSize;
+// }
 
-.card-text{
-    font-size: $orderInfoFontSize;
-}
+// .card-text{
+//     font-size: $orderInfoFontSize;
+// }
 
-.cardInfo{
-    display: inline;
-    font-size: $generalFontSize;
-}
+// .cardInfo{
+//     display: inline;
+//     font-size: $generalFontSize;
+// }

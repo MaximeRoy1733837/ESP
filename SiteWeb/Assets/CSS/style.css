@@ -5090,11 +5090,11 @@ input[type="button"].btn-block {
 }
 
 .card-title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .card-subtitle {
-  margin-top: -0.75rem;
+  margin-top: -0.375rem;
   margin-bottom: 0;
 }
 
@@ -5111,7 +5111,7 @@ input[type="button"].btn-block {
 }
 
 .card-header {
-  padding: 1.5rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
@@ -5126,7 +5126,7 @@ input[type="button"].btn-block {
 }
 
 .card-footer {
-  padding: 1.5rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
@@ -5137,7 +5137,7 @@ input[type="button"].btn-block {
 
 .card-header-tabs {
   margin-right: -0.625rem;
-  margin-bottom: -1.5rem;
+  margin-bottom: -0.75rem;
   margin-left: -0.625rem;
   border-bottom: 0;
 }
@@ -5253,7 +5253,7 @@ input[type="button"].btn-block {
 }
 
 .card-columns .card {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 @media (min-width: 576px) {
@@ -10764,8 +10764,33 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
-p {
-  font: 24px "Fira Sans", sans-serif;
+.card .card-header p {
+  font: 20px "Fira Sans", sans-serif;
+  color: black;
+  text-align: left;
+}
+
+.card .card-body p {
+  font: 18px "Fira Sans", sans-serif;
+  text-align: center;
+}
+
+.card .card-body h5 {
+  font-size: large;
+}
+
+.card .card-body h6 {
+  font-size: xx-large;
+}
+
+.card .card-body .rejectQuantities {
+  color: #dc3545;
+  font-size: xx-large;
+}
+
+.card .card-body .acceptQuantities {
+  color: #568f00;
+  font-size: xx-large;
 }
 
 h1 {
@@ -10804,23 +10829,5 @@ em.is-invalid {
   margin-top: 100px;
   margin-left: 10px;
   margin-right: 10px;
-}
-
-.cardH5 {
-  color: black;
-  text-align: left;
-}
-
-.card-title {
-  font-size: large;
-}
-
-.card-text {
-  font-size: xx-large;
-}
-
-.cardInfo {
-  display: inline;
-  font-size: large;
 }
 /*# sourceMappingURL=style.css.map */
