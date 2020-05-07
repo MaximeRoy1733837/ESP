@@ -11,7 +11,6 @@ add_commande = (
 
 dataArray = []
 
-
 def insert(add, data):
     connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
     cursor = connection.cursor(buffered=True)
