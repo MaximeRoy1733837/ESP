@@ -12,6 +12,7 @@ add_commande = (
 dataArray = []
 
 def insert(add, data):
+    #changer le mot de passe
     connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
     cursor = connection.cursor(buffered=True)
     cursor.execute(add, data)
@@ -66,6 +67,7 @@ def on_message(client, userdata, msg):
     if msg.topic == "Mecanium/ESP/Quantite_commande" and commande != 1:
         commande = 1
         dataCommande = (dataArray[2], dataArray[3])
+        #Changer le mot de passe
         connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
         cursor = connection.cursor(buffered=True)
         cursor.execute(add_commande, dataCommande)

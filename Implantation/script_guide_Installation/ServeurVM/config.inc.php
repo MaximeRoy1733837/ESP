@@ -14,7 +14,7 @@ if($wampConf['SupportMySQL'] == 'on') {
 	$cfg['Servers'][$i]['user'] = 'root';
 	/* ********************************************************************* */
 	// Écrire votre mot de passe ici
-	$cfg['Servers'][$i]['password'] = 'Mecanium20';
+	$cfg['Servers'][$i]['password'] = 'Votre mot de passe';
 	/* ********************************************************************* */
 	$cfg['Servers'][$i]['AllowNoPassword'] = false;
 }
