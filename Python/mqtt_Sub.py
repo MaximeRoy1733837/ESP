@@ -120,9 +120,10 @@ def on_message(client, userdata, msg):
 
 
 client = mqtt.Client()
+client.username_pw_set(username="esp", password="esp2020")
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("test.mosquitto.org", 1883, 60)
+client.connect("192.168.56.56", 1883, 60)
 
 client.loop_forever()
