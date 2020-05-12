@@ -25,3 +25,9 @@ connection_messages true
 log_timestamp true
 allow_anonymous false
 password_file passwordfile
+
+
+Étape 4:
+
+mosquitto -c mosquitto.conf
+
