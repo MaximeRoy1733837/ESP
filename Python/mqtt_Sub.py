@@ -2,6 +2,10 @@ import paho.mqtt.client as mqtt
 import mysql.connector
 from datetime import datetime, date
 
+userBroker = ""
+mdpBroker = ""
+ipBroker = ""
+
 commande = 0
 id_commande = 0
 
@@ -68,7 +72,7 @@ def on_message(client, userdata, msg):
         commande = 1
         dataCommande = (dataArray[2], dataArray[3])
         #Changer le mot de passe
-        connection = mysql.connector.connect(user='root', password='', host='localhost', database='bd_esp')
+        connection = mysql.connector.connect(user='root', password='Votre Mot de Passe', host='localhost', database='bd_esp')
         cursor = connection.cursor(buffered=True)
         cursor.execute(add_commande, dataCommande)
         id_commande = cursor.lastrowid
@@ -120,10 +124,10 @@ def on_message(client, userdata, msg):
 
 
 client = mqtt.Client()
-client.username_pw_set(username="esp", password="esp2020")
+client.username_pw_set(username=userBroker, password=mdpBroker)
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("192.168.56.56", 1883, 60)
+client.connect(ipBroker, 1883, 60)
 
 client.loop_forever()
