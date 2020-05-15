@@ -78,38 +78,38 @@ INSERT INTO `tbl_machine` (`nom_machine`)
 		VALUES 	('Siemens S7-1200'),
 				('Raspberry Pi');
                 
-INSERT INTO `tbl_commande` (`nom_commande`,`quantite_a_produire`)
-		VALUES 	('bouchon vert',150),
-				('bouchon jaune',40);
+--  INSERT INTO `tbl_commande` (`nom_commande`,`quantite_a_produire`)
+		--  VALUES 	('bouchon vert',150),
+				--  ('bouchon jaune',40);
                 
-INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
-		VALUES 	(1583863424,'Jeudi 2 avril 3:52:16',22,1,1,1),
-				(1583863453,'Jeudi 2 avril 3:52:16',24,1,2,1),
-                (1583863460,'Jeudi 2 avril 3:52:16',150,1,3,1),
-                (1583863462,'Jeudi 2 avril 3:52:16',15,1,4,1),
-                (1583863480,'Vendredi 3 avril 13:52:07',25,1,1,2),
-				(1583863484,'Vendredi 3 avril 13:52:08',20,1,2,2),
-                (1583863490,'Vendredi 3 avril 13:52:01',40,1,3,2),
-                (1583863495,'Vendredi 3 avril 13:52:02',2,1,4,2);
+--  INSERT INTO `tbl_info` (`epoch`, `date`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
+		--  VALUES 	(1583863424,'Jeudi 2 avril 3:52:16',22,1,1,1),
+				--  (1583863453,'Jeudi 2 avril 3:52:16',24,1,2,1),
+                --  (1583863460,'Jeudi 2 avril 3:52:16',150,1,3,1),
+                --  (1583863462,'Jeudi 2 avril 3:52:16',15,1,4,1),
+                --  (1583863480,'Vendredi 3 avril 13:52:07',25,1,1,2),
+				--  (1583863484,'Vendredi 3 avril 13:52:08',20,1,2,2),
+                --  (1583863490,'Vendredi 3 avril 13:52:01',40,1,3,2),
+                --  (1583863495,'Vendredi 3 avril 13:52:02',2,1,4,2);
                 
-INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
-		VALUES 	('Lundi 6 avril 13:52',22,1,1,1),
-				('Lundi 6 avril 13:52',20,1,2,1),
-                ('Lundi 6 avril 13:52',35,1,3,1),
-				('Lundi 6 avril 13:52',6,1,4,1),
-                ('Lundi 6 avril 13:52',24,1,1,2),
-				('Lundi 6 avril 13:52',20,1,2,2),
-                ('Lundi 6 avril 13:52',150,1,3,2),
-				('Lundi 6 avril 13:52',2,1,4,2);
+--  INSERT INTO `tbl_historique` (`date_historique`, `valeur_capteur`, `id_machine`, `id_capteur`,`id_commande`)
+		--  VALUES 	('Lundi 6 avril 13:52',22,1,1,1),
+				--  ('Lundi 6 avril 13:52',20,1,2,1),
+                --  ('Lundi 6 avril 13:52',35,1,3,1),
+				--  ('Lundi 6 avril 13:52',6,1,4,1),
+                --  ('Lundi 6 avril 13:52',24,1,1,2),
+				--  ('Lundi 6 avril 13:52',20,1,2,2),
+                --  ('Lundi 6 avril 13:52',150,1,3,2),
+				--  ('Lundi 6 avril 13:52',2,1,4,2);
 
 INSERT INTO `tbl_type_evenement` (`nom_evenement`)
 		VALUES 	('manque_bouchon'),
 				('machine_bloque'),
                 ('machine_arrete');
                 
-INSERT INTO `tbl_evenement` (`date_evenement`,`id_machine`,`id_type_evenement`,`notifier`)
-		VALUES 	('Lundi 6 avril 13:52',1,1,true),
-				('Lundi 6 avril 13:55',1,2,true);
+--  INSERT INTO `tbl_evenement` (`date_evenement`,`id_machine`,`id_type_evenement`,`notifier`)
+		--  VALUES 	('Lundi 6 avril 13:52',1,1,true),
+				--  ('Lundi 6 avril 13:55',1,2,true);
                 
 INSERT INTO `tbl_utilisateur` (`id_utilisateur`, `nom`, `prenom`, `nom_utilisateur`, `motPasse`) 
 		VALUES 	(1,'Roy','Maxime','mroy','*FB488315048F29BF9A666F7B7102E6DE1D3363B8'),
