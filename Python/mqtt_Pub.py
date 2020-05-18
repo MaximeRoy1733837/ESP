@@ -9,32 +9,36 @@ print(" ")
 
 
 def publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, quantiteMauvais, bloque):
-    publish.single("Mecanium/ESP/Epoch", epoch, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    userBroker = ""
+    mdpBroker = ""
+    ipBroker = ""
 
-    publish.single("Mecanium/ESP/Temps", datetime.datetime.now().strftime("%x %X"), hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Epoch", epoch, hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Nom_commande", commande, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Temps", datetime.datetime.now().strftime("%x %X"), hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Quantite_commande", quantite, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Nom_commande", commande, hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Temperature", temperature, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Quantite_commande", quantite, hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Humidite", humidite, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Temperature", temperature, hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Quantite_bon", quantiteBon, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Humidite", humidite, hostname=ip,
+                   auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Quantite_mauvais", quantiteMauvais, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Quantite_bon", quantiteBon, hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Bloque", bloque, hostname="192.168.56.56",
-                   auth={'username': "esp", 'password': "esp2020"})
+    publish.single("Mecanium/ESP/Quantite_mauvais", quantiteMauvais, hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
+
+    publish.single("Mecanium/ESP/Bloque", bloque, hostname=ipBroker,
+                   auth={'username': userBroker, 'password': mdpBroker})
     #print("Done")
     time.sleep(6)
 
