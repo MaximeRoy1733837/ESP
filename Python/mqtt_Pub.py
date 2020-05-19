@@ -28,7 +28,7 @@ def publishInfo(epoch, commande, quantite, temperature, humidite, quantiteBon, q
     publish.single("Mecanium/ESP/Temperature", temperature, hostname=ipBroker,
                    auth={'username': userBroker, 'password': mdpBroker})
 
-    publish.single("Mecanium/ESP/Humidite", humidite, hostname=ip,
+    publish.single("Mecanium/ESP/Humidite", humidite, hostname=ipBroker,
                    auth={'username': userBroker, 'password': mdpBroker})
 
     publish.single("Mecanium/ESP/Quantite_bon", quantiteBon, hostname=ipBroker,
