@@ -65,7 +65,6 @@ function PopMesureChart(arrayDataTemperature, arrayDataHumidite, labelTime){
         responsive: true,
         scales: {
           xAxes: [ {
-            //type: 'time',
             display: true,
             scaleLabel: {
               display: true,
@@ -73,7 +72,6 @@ function PopMesureChart(arrayDataTemperature, arrayDataHumidite, labelTime){
             }
           }],
           yAxes: [ {
-            //type: 'number',
             display: true,
             scaleLabel: {
               display: true,

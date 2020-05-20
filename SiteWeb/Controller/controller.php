@@ -29,12 +29,4 @@
 
         require('view/ViewHistorique.php');
     }
-
-    function Information()
-    {
-        $info = new Manager;
-        $resultat = $info->getInfo();
-
-        require('view/ViewHome.php');
-    }
 ?>

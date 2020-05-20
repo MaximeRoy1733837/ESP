@@ -23,18 +23,6 @@
         }
     }
 
-    function GetLastInsertedInfo()
-    {
-        $class = new ManagerAjax();
-        $resultat = $class->getLastInsertedInfo();
-        $resultatFetch = $resultat->fetch();
-
-        echo json_encode(array("epoch" => $resultatFetch["epoch"], "nom_commande" => $resultatFetch["nom_commande"], 
-                                "date" => $resultatFetch["date"], "quantite_produire" => $resultatFetch["quantite_produite"], "temperature" => $resultatFetch["temperature"],
-                                 "humidite" => $resultatFetch["humidite"], "quantite_bon" => $resultatFetch["quantite_bon"], "quantite_bad" => $resultatFetch["quantite_mauvais"],
-                                "bloque" => $resultatFetch["bloque"]));
-    }
-
     function Connexion()
     {
         $currentPage = "Connexion";

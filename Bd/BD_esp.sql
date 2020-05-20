@@ -116,13 +116,6 @@ INSERT INTO `tbl_utilisateur` (`id_utilisateur`, `nom`, `prenom`, `nom_utilisate
 				(2,'Letourneau','Louca','lletourneau','*5B821ED96F8C48CE7DD6E21037B6DC704D32C016'),
                 (3,'Lepage','Yves','ylapage','*5B821ED96F8C48CE7DD6E21037B6DC704D32C016');
                 
-delimiter |
-create procedure getLastInsertedInfo()
-begin
-	select * 
-    from tbl_info 
-    where id_info = (select max(id_info) from tbl_info);
-end|
 
 delimiter |
 create procedure VerificationLogin(in _nom varchar(20), in _mpd varchar(45))
@@ -205,30 +198,6 @@ begin
 	update tbl_evenement
 	set notifier = true
 	where id_evenement = (select max(id_evenement) from tbl_evenement); 
-end|
-
-delimiter |
-create procedure getRowMesure(in _RowWantedMinusOne int)
-begin
-	select valeur_capteur, epoch, nom_capteur
-    from tbl_info inner join tbl_commande
-    on tbl_info.id_commande = tbl_commande.id_commande
-    inner join tbl_capteur
-    on tbl_info.id_capteur = tbl_capteur.id_capteur
-    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur in('temperature','humidite')
-    order by epoch asc, tbl_capteur.id_capteur
-    limit _RowWantedMinusOne,1;
-end|
-
-delimiter |
-create procedure getNumberRowMesure(in _RowWantedMinusOne int)
-begin
-	select count(distinct(epoch)) as RowCount
-    from tbl_info inner join tbl_commande
-    on tbl_info.id_commande = tbl_commande.id_commande
-    inner join tbl_capteur
-    on tbl_info.id_capteur = tbl_capteur.id_capteur
-    where (tbl_info.id_commande = (select max(id_commande) from tbl_commande)) and tbl_capteur.nom_capteur in('temperature','humidite');
 end|
 
 -- drop database bd_esp
