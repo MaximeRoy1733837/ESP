@@ -37,7 +37,7 @@
     DrawMesure();
 
     StartUpdatingQuantities();
-    updateMesure = setInterval(DrawMesure, 6000);
+    updateMesure = setInterval(DrawMesure, 6000);   // Ne s'arrêt jamais
   }
 
   function DrawBasicInfo()
@@ -60,7 +60,7 @@
           if((window.orderName != data["nom_commande"]) && (window.orderName != ""))
           {
             window.orderName = data["nom_commande"];
-            if(window.updateQuantities == 0)
+            if(window.updateQuantities == 0)    //Empêche de set deux fois le même interval (updateQuantities) si la commande est terminé avant l'ouverture de la page
             {
               StopUpdatingOrderName();
               StartUpdatingQuantities();
@@ -83,12 +83,12 @@
         $('#lastUpdateQuantities').html('Dernière mise à jour: ' + data[5]);
 
 
-        if(window.quantitiesWhenEvent != -1 && window.quantitiesWhenEvent != parseInt(data[3]))
+        if(window.quantitiesWhenEvent != -1 && window.quantitiesWhenEvent != parseInt(data[3]))   // Si la quantite a augmenter depuis l'arrêt = marchine en marche = erreur corriger
         {
           ChangeEventStateToTrue();
         }
 
-        if (parseInt(data[1]) > 0)
+        if (parseInt(data[1]) > 0)    // Si la quantite a produire est plus grande que 0, évite la division par 0 par la fonction UpdateProgressBar
         {
           UpdateProgressBar(parseInt(data[3]),parseInt(data[1]));
         }
@@ -104,11 +104,11 @@
     if(percent >= 100)
     {
       percent = 100;
-      $('#progression').addClass("bg-success");   
+      $('#progression').addClass("bg-success");   // Change la couleur de la progress bar en vert
 
         if(window.endOrder === false)
         {
-          Swal.fire(
+          Swal.fire(    // Lance une un pop-up sweetAlert
             'Succès',
             'Commande terminé',
             'success'
@@ -132,8 +132,8 @@
       CheckForEvent(_quantiteBon);
     }         
 
-    $('#progression').html(percent + '%');
-    $('#progression').attr('aria-valuenow', percent).css('width', percent + '%');
+    $('#progression').html(percent + '%');    // Change le texte
+    $('#progression').attr('aria-valuenow', percent).css('width', percent + '%');   // Avance la progression
   }
 
   function DrawMesure()
@@ -145,7 +145,7 @@
         $('#temperature').html(data[2]);
         $('#humidite').html(data[0]);
 
-        if(document.readyState == "complete" && endOrder === false)
+        if(document.readyState == "complete" && endOrder === false)   // Permet d'attendre que le graphique soit affiché (PopMesureChart) avant d'être mis à jours
         {
           UpdateMesureChart(data[2], data[0], data[3]);
         }
@@ -184,21 +184,21 @@
 
   function ShowEvent(eventMessage, quantiteLorsDeArret)
   {
-    if(window.quantitiesWhenEvent === -1)
+    if(window.quantitiesWhenEvent === -1)   // Permet d'afficher une seule fois l'alerte
       {
-        Swal.fire(
+        Swal.fire(    // Lance une un pop-up sweetAlert
           'Machine Arrêté',
           eventMessage,
           'error'
         );
         window.quantitiesWhenEvent = quantiteLorsDeArret;
-        $('#progression').addClass("bg-danger");
+        $('#progression').addClass("bg-danger");    // Change la couleur de la progress bar en rouge
         $('#mg_erreur').addClass("d-block");
         $('#mg_erreur').html(eventMessage);
       }
   }
 
-  function ChangeEventStateToTrue()
+  function ChangeEventStateToTrue()   // Change le champ "Notifier" à 1 au lieu de 0 dans la tbl_evenement
   {
     $.ajax({
       url:'ajaxHandler.php?event=SetNotifierToTrue',
